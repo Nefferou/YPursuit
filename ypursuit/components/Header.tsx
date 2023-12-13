@@ -4,14 +4,16 @@ import Link from 'next/link';
 
 const Header = () => {
     return (
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <Link href="/">Home</Link>
+        <header >
+            <nav className="flex items-center justify-between">
+            <ul className="flex space x-4 ">
+                    <li className="m-2 bg-gray-500 p-4">
+                        <Link href="/" className="text-white hover:text-gray-300">Home
+                        </Link>
                     </li>
-                    <li>
-                        <Link href="/login">Login</Link>
+                    <li className="m-2 bg-gray-500 p-4">
+                        <Link href="/login" className="text-white hover:text-gray-300">Login
+                        </Link>
                     </li>
                 </ul>
             </nav>
