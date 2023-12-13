@@ -7,11 +7,11 @@ const Header = () => {
         <header >
             <nav className="flex items-center justify-between">
                 <ul className="flex space x-4 ">
-                    <li className="m-2 p-4 transition-colors duration-300 bg-gray-500 hover:bg-green-500">
+                    <li className="m-2 p-4 transition-colors duration-300 bg-gray-300 hover:bg-green-500 rounded-md">
                         <Link href="/" className="text-white hover:text-gray-300">Home
                         </Link>
                     </li>
-                    <li className="m-2 p-4 transition-colors duration-300 bg-gray-500 hover:bg-green-500">
+                    <li className="m-2 p-4 transition-colors duration-300 bg-gray-300 hover:bg-green-500 rounded-md">
                         <Link href="/login" className="text-white hover:text-gray-300">Login
                         </Link>
                     </li>
