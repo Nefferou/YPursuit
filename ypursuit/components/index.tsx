@@ -1,5 +1,4 @@
-// components partagés utilisés dans l’ensemble de l’application
-import React from 'react'
+import React from 'react';
 
 const index = () => {
   return (
