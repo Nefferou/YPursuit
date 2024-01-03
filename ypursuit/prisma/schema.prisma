@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum Status {
+  WAITING
+  STARTED
+  FINISHED
+}
+
+enum Theme {
+  INFORM
+  MARKETING
+  CREATIVE
+}
+
+type Answer {
+  answer    String
+  isCorrect Boolean
+}
+
+model User {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  username     String  @unique
+  email        String  @unique
+  password     String
+  coins        Int     @default(0)
+  score        Int     @default(0)
+  skins        Skin[]
+  activeSkinId String? @db.ObjectId
+  Games        Games?  @relation(fields: [gamesId], references: [id])
+  gamesId      String? @db.ObjectId
+}
+
+model Skin {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  image       String
+  price       Int
+  description String
+  isReleased  Boolean @default(false)
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
+}
+
+model Games {
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  code              String
+  difficulty        Difficulty
+  theme             String
+  numberOfQuestions Int
+  status            String
+  hostId            String     @db.ObjectId
+  players           User[]
+}
+
+model Question {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  difficulty Difficulty
+  question   String
+  theme      String
+  comment    String
+  answers    Answer[]
+}
