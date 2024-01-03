@@ -1,10 +1,11 @@
-import Header from '@/components/Header'
+'use client';
+import React from 'react';
+import HorizontalScroll from '../components/HorizontalScroll';
 
 export default function Home() {
   return (
-    <div>
-      <Header />
-
-    </div>
-  )
+    <main >
+      <HorizontalScroll/>
+    </main>
+  );
 }
