@@ -1,19 +1,17 @@
 import LogoYPursuit from '../LogoYPursuit';
-import HeaderNav from '../HeaderNav';
-import IconList from '../IconList';
-
-import classes from './index.module.css';
+import IconList from './IconList';
+import List from './List';
 
 function Header() {
 
     return (
-        <div className={classes.header}>
-            <div className={classes.headerTwo}>
+        <nav className='flex flex-row justify-between items-end w-full px-8 py-6'>
+            <div className='flex flex-row items-end gap-8'>
                 <LogoYPursuit />
                 <IconList />
             </div>
-            <HeaderNav />
-        </div>
+            <List />
+        </nav>
     );
 };
 
