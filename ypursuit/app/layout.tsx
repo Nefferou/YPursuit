@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'YPursuit - Description',
   description: 'A jeu de ...',
   keywords: [
-    'YNov',
+    'Ynov',
     'jeu'
   ]
 }
