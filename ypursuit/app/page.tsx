@@ -1,10 +1,10 @@
 'use client';
 import React from 'react';
-import HorizontalScroll from '../components/HorizontalScroll.js';
+import HorizontalScroll from '../components/HorizontalScroll';
 
 export default function Home() {
   return (
-    <main className='overflow-hiden'>
+    <main >
       <HorizontalScroll/>
     </main>
   );
