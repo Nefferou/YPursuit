@@ -42,7 +42,7 @@ const SignInForm = () => {
             router.refresh();
             router.push('/');
         }
-    }, [status]);
+    }, [status, router]);
 
     return (
         <div className='flex flex-col gap-4 bg-gray-400 p-4'>

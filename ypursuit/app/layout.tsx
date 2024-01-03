@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/ui/Layout/Navbar'
-import Provider from '@/components/ui/Layout/Provider'
+import Navbar from '@/components/ui/Navbar'
+import Provider from '@/components/ui/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'YPursuit - Description',
-  description: 'A jeu de ...',
+  title: 'YPursuit - Title',
+  description: 'YPursuit - Description',
   keywords: [
-    'YNov',
+    'Ynov',
     'jeu'
   ]
 }
