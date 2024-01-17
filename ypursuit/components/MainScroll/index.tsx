@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Header from '../Header';
 
 const MainScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,7 +13,7 @@ const MainScroll: React.FC = () => {
 
       const direction = delta > 0 ? 1 : -1;
 
-      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 6));
 
       setCurrentSection(nextSection);
       scrollToSection(nextSection);
@@ -22,7 +23,7 @@ const MainScroll: React.FC = () => {
       event.preventDefault();
       const direction = event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
 
-      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 6));
 
       setCurrentSection(nextSection);
       scrollToSection(nextSection);
@@ -50,6 +51,7 @@ const MainScroll: React.FC = () => {
 
   return (
     <div ref={containerRef} tabIndex={0}>
+      <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
       <div className="slideContainer">
         <div id="slide1" className="w-screen h-screen flex justify-center items-center border-2 border-black">
           {/* Contenu de votre div ici */}

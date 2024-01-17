@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Logo from '@/assets/images/logoWhite.svg';
+import Logo from '@/assets/images/logoBlack.svg';
 import classes from './index.module.css';
 
 function LogoYPursuit() {
