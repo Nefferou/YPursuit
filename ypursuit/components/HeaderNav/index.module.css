@@ -14,3 +14,8 @@
     cursor: pointer;
     font-size: 100%;
 }
+.activeButton {
+    text-decoration: underline;
+    color:blue;
+    font-weight: bold;
+}
