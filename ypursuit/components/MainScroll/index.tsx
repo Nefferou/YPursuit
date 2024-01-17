@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-const HorizontalScroll: React.FC = () => {
+const MainScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
@@ -49,27 +49,29 @@ const HorizontalScroll: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef}tabIndex={0}>
+    <div ref={containerRef} tabIndex={0}>
       <div className="slideContainer">
-        <div id="slide1" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Homepage
-          <button onClick={() => scrollToSection(2)}>
-            <br />
-            Go to section 2
-          </button>
+        <div id="slide1" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
-        <div id="slide2" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Le projet
+        <div id="slide2" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
-        <div id="slide3" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          About Us
+        <div id="slide3" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
-        <div id="slide4" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          More
+        <div id="slide4" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
+        </div>
+        <div id="slide5" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
+        </div>
+        <div id="slide6" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
       </div>
     </div>
   );
 };
 
-export default HorizontalScroll;
+export default MainScroll;
