@@ -53,28 +53,28 @@ const HorizontalScroll: React.FC = () => {
   return (
     <div>
       <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
-    <div ref={containerRef} tabIndex={0} autoFocus>
-      <div className="slideContainer">
-        <div id="slide1" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Jouer
-        </div>
-        <div id="slide2" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Le projet
-        </div>
-        <div id="slide3" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          L'équipe
-        </div>
-        <div id="slide4" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Nos personnages
-        </div>
-        <div id="slide5" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Goodies
-        </div>
-        <div id="slide6" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Nous contacter
+      <div ref={containerRef} tabIndex={0} autoFocus>
+        <div className="slideContainer">
+          <div id="slide1" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+            Jouer
+          </div>
+          <div id="slide2" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+            Le projet
+          </div>
+          <div id="slide3" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+            L'équipe
+          </div>
+          <div id="slide4" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+            Nos personnages
+          </div>
+          <div id="slide5" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+            Goodies
+          </div>
+          <div id="slide6" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+            Nous contacter
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
