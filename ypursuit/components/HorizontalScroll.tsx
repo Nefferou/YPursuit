@@ -29,6 +29,7 @@ const HorizontalScroll: React.FC = () => {
       scrollToSection(nextSection);
     };
 
+
     if (containerRef.current) {
       containerRef.current.addEventListener('wheel', handleWheel);
       containerRef.current.addEventListener('keydown', handleKeyDown);
@@ -51,7 +52,7 @@ const HorizontalScroll: React.FC = () => {
 
   return (
     <div>
-      <Header currentSection={currentSection} scrollToSection={scrollToSection} />
+      <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
     <div ref={containerRef} tabIndex={0} autoFocus>
       <div className="slideContainer">
         <div id="slide1" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
