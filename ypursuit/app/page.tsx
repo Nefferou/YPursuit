@@ -1,12 +1,10 @@
-'use client';
 import React from 'react';
-import MainScroll from '../components/MainScroll';
-
+import MainSection from '../components/MainSection';
 
 export default function Home() {
   return (
     <main>
-      <MainScroll />
+      <MainSection />
     </main>
   );
 }
