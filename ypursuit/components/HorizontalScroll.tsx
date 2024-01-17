@@ -18,13 +18,25 @@ const HorizontalScroll: React.FC = () => {
       scrollToSection(nextSection);
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      event.preventDefault();
+      const direction = event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
+
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+
+      setCurrentSection(nextSection);
+      scrollToSection(nextSection);
+    };
+
     if (containerRef.current) {
       containerRef.current.addEventListener('wheel', handleWheel);
+      containerRef.current.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
       if (containerRef.current) {
         containerRef.current.removeEventListener('wheel', handleWheel);
+        containerRef.current.removeEventListener('keydown', handleKeyDown);
       }
     };
   }, [currentSection]);
@@ -37,7 +49,7 @@ const HorizontalScroll: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef}tabIndex={0}>
       <div className="slideContainer">
         <div id="slide1" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
           Homepage
