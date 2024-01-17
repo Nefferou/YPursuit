@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Header from '../Header';
+import CharacterSlide from '../CharacterSlide';
 
 const MainScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -62,9 +63,7 @@ const MainScroll: React.FC = () => {
         <div id="slide3" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
-        <div id="slide4" className="w-full h-screen flex justify-center items-center border-y border-black">
-          {/* Contenu de votre div ici */}
-        </div>
+        <CharacterSlide />
         <div id="slide5" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
