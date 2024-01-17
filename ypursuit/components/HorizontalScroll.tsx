@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Header from '../components/Header';
 
 const HorizontalScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,7 +13,7 @@ const HorizontalScroll: React.FC = () => {
 
       const direction = delta > 0 ? 1 : -1;
 
-      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 6));
 
       setCurrentSection(nextSection);
       scrollToSection(nextSection);
@@ -22,7 +23,7 @@ const HorizontalScroll: React.FC = () => {
       event.preventDefault();
       const direction = event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
 
-      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 6));
 
       setCurrentSection(nextSection);
       scrollToSection(nextSection);
@@ -49,21 +50,30 @@ const HorizontalScroll: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef}tabIndex={0} autoFocus>
+    <div>
+      <Header currentSection={currentSection} scrollToSection={scrollToSection} />
+    <div ref={containerRef} tabIndex={0} autoFocus>
       <div className="slideContainer">
         <div id="slide1" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Homepage
+          Jouer
         </div>
         <div id="slide2" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
           Le projet
         </div>
         <div id="slide3" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          About Us
+          L'équipe
         </div>
         <div id="slide4" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
-          More
+          Nos personnages
+        </div>
+        <div id="slide5" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+          Goodies
+        </div>
+        <div id="slide6" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
+          Nous contacter
         </div>
       </div>
+    </div>
     </div>
   );
 };
