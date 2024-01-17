@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/ui/Navbar'
 import Provider from '@/components/ui/Provider'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'YPursuit - Title',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: [
     'Ynov',
     'jeu'
-  ]
+  ],
 }
 
 export default function RootLayout({
