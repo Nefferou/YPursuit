@@ -49,22 +49,18 @@ const HorizontalScroll: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef}tabIndex={0}>
+    <div ref={containerRef}tabIndex={0} autoFocus>
       <div className="slideContainer">
-        <div id="slide1" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
+        <div id="slide1" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
           Homepage
-          <button onClick={() => scrollToSection(2)}>
-            <br />
-            Go to section 2
-          </button>
         </div>
-        <div id="slide2" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
+        <div id="slide2" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
           Le projet
         </div>
-        <div id="slide3" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
+        <div id="slide3" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
           About Us
         </div>
-        <div id="slide4" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
+        <div id="slide4" className="w-full h-screen flex justify-center items-center text-8xl border-2 border-black">
           More
         </div>
       </div>
