@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Header from '../Header';
 
-const HorizontalScroll: React.FC = () => {
+const MainScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
@@ -12,7 +13,7 @@ const HorizontalScroll: React.FC = () => {
 
       const direction = delta > 0 ? 1 : -1;
 
-      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 6));
 
       setCurrentSection(nextSection);
       scrollToSection(nextSection);
@@ -22,7 +23,7 @@ const HorizontalScroll: React.FC = () => {
       event.preventDefault();
       const direction = event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
 
-      const nextSection = Math.max(1, Math.min(currentSection + direction, 4));
+      const nextSection = Math.max(1, Math.min(currentSection + direction, 6));
 
       setCurrentSection(nextSection);
       scrollToSection(nextSection);
@@ -49,27 +50,30 @@ const HorizontalScroll: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef}tabIndex={0}>
+    <div ref={containerRef} tabIndex={0}>
+      <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
       <div className="slideContainer">
-        <div id="slide1" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Homepage
-          <button onClick={() => scrollToSection(2)}>
-            <br />
-            Go to section 2
-          </button>
+        <div id="slide1" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
-        <div id="slide2" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          Le projet
+        <div id="slide2" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
-        <div id="slide3" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          About Us
+        <div id="slide3" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
-        <div id="slide4" className="w-screen h-screen flex justify-center items-center text-8xl border-2 border-black">
-          More
+        <div id="slide4" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
+        </div>
+        <div id="slide5" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
+        </div>
+        <div id="slide6" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+          {/* Contenu de votre div ici */}
         </div>
       </div>
     </div>
   );
 };
 
-export default HorizontalScroll;
+export default MainScroll;

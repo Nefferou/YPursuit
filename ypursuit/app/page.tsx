@@ -1,11 +1,13 @@
 'use client';
 import React from 'react';
-import HorizontalScroll from '../components/HorizontalScroll';
+import MainScroll from '../components/MainScroll';
+
 
 export default function Home() {
   return (
     <main>
-      <HorizontalScroll />
+      <MainScroll />
     </main>
   );
 }
+  
