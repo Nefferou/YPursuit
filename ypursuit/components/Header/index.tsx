@@ -15,8 +15,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, scrollToSection,setCurr
     <div className={classes.header} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000 }}>
       <div className={classes.headerTwo}>
         <LogoYPursuit />
-        <IconList
-        />
+        <IconList />
       </div>
       <HeaderNav
         currentSection={currentSection}
