@@ -53,22 +53,22 @@ const MainScroll: React.FC = () => {
     <div ref={containerRef} tabIndex={0}>
       <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
       <div className="slideContainer">
-        <div id="slide1" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+        <div id="slide1" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
-        <div id="slide2" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+        <div id="slide2" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
-        <div id="slide3" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+        <div id="slide3" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
-        <div id="slide4" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+        <div id="slide4" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
-        <div id="slide5" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+        <div id="slide5" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
-        <div id="slide6" className="w-screen h-screen flex justify-center items-center border-2 border-black">
+        <div id="slide6" className="w-full h-screen flex justify-center items-center border-y border-black">
           {/* Contenu de votre div ici */}
         </div>
       </div>
