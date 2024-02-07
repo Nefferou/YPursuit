@@ -14,19 +14,15 @@ import CardLully from '@/assets/images/card/lulyPile.svg';
 import CardLullyFace from '@/assets/images/card/lulyFace.svg';
 
 const CharacterSlide = () => {
-    const [hoverStates, setHoverStates] = useState([false, false, false]);
+    const [hoverIndex, setHoverIndex] = useState(-1);
     const [startIndex, setStartIndex] = useState(0);
 
     const handleMouseEnter = (index: number) => {
-        const newHoverStates = [...hoverStates];
-        newHoverStates[index] = true;
-        setHoverStates(newHoverStates);
+        setHoverIndex(index);
     };
 
-    const handleMouseLeave = (index: number) => {
-        const newHoverStates = [...hoverStates];
-        newHoverStates[index] = false;
-        setHoverStates(newHoverStates);
+    const handleMouseLeave = () => {
+        setHoverIndex(-1);
     };
 
     const cards = [
@@ -41,14 +37,14 @@ const CharacterSlide = () => {
     const showNextImages = () => {
         console.log("Showing next images");
         if (startIndex < cards.length - 3) {
-            setStartIndex(startIndex + 1);
+            setStartIndex(startIndex + 3);
         }
     };
 
     const showPreviousImages = () => {
         console.log("Showing previous images");
         if (startIndex > 0) {
-            setStartIndex(startIndex - 1);
+            setStartIndex(startIndex - 3);
         }
     };
 
@@ -58,9 +54,9 @@ const CharacterSlide = () => {
             <button className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer z-10 text-5xl" onClick={showNextImages}>{'>'}</button>
             {cards.slice(startIndex, startIndex + 3).map((card, index) => (
                 <div key={index} className='w-1/2 h-1/2 flex transition-transform transform-gpu hover:rotate-[360deg]'
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}>
-                    <Image src={hoverStates[index] ? card.back : card.front} alt="Logo" />
+                    onMouseEnter={() => handleMouseEnter(startIndex + index)}
+                    onMouseLeave={handleMouseLeave}>
+                    <Image src={(hoverIndex === startIndex + index) ? card.back : card.front} alt="Logo" />
                 </div>
             ))}
         </div>
