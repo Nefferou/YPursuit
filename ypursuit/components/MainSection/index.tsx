@@ -84,10 +84,7 @@ const MainSection: React.FC = () => {
           </div>
         </Slide>
         <Slide key={4} id={4}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <CharacterSlide />
         </Slide>
         <Slide key={5} id={5}>
           <div className="flex flex-col justify-center items-center">
