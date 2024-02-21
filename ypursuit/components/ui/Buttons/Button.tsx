@@ -84,11 +84,11 @@ const SimpleButton = ({ children, handleClick, styles, type, title, disabled, ba
     }
 }
 
-const DoubleButton = ({ children, handleClick, type, title, disabled, backgroundColor, icon }: ButtonProps) => {
+const DoubleButton = ({ children, handleClick, type, title, disabled, backgroundColor, icon, styles }: ButtonProps) => {
     switch (backgroundColor) {
         case 'green':
             return <button
-                className="relative px-6 py-3 font-bold group"
+                className={`relative px-6 py-3 font-bold group ${styles}`}
                 onClick={handleClick}
                 type={type}
                 title={title}

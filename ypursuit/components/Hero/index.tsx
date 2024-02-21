@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import React from 'react';
 import Button from '../ui/Buttons/Button';
-import Rusty from '../../assets/images/rusty.svg';
-import Lully from '../../assets/images/lully.svg';
+import Rusty from '../../assets/images/character/rusty.svg';
+import Lully from '../../assets/images/character/lully.svg';
 import HeroBg from '../../assets/images/hero.svg';
 import Logo from '../../assets/images/logoWhite.svg';
 

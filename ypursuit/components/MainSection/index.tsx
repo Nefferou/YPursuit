@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'reac
 import Header from '../Header';
 import CharacterSlide from '../CharacterSlide';
 import Hero from '../Hero';
+import ProjectSection from '../Project';
 
 const MAX_SECTION = 6;
 
@@ -12,7 +13,7 @@ interface SlideProps {
 }
 
 const Slide: React.FC<SlideProps> = ({ id, children }) => (
-  <div id={`slide${id}`} className="w-screen h-screen flex justify-center items-center border-2 border-black">
+  <div id={`slide${id}`} className="w-screen h-screen flex justify-center items-center">
     {children}
   </div>
 );
@@ -70,10 +71,7 @@ const MainSection: React.FC = () => {
           <Hero />
         </Slide>
         <Slide key={2} id={2}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">I&apos;m YPursuit</h2>
-          </div>
+          <ProjectSection />
         </Slide>
         <Slide key={3} id={3}>
           <div className="flex flex-col justify-center items-center">
