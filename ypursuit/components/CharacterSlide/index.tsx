@@ -57,7 +57,7 @@ const CharacterSlide = () => {
                     onMouseEnter={() => handleMouseEnter(startIndex + index)}
                     onMouseLeave={handleMouseLeave}>
                     <div className={` ${hoverIndex === startIndex + index && '[transform:rotateY(180deg)]'}`}>
-                        <Image src={(hoverIndex === startIndex + index) ? card.back : card.front} alt="Logo" />
+                        <Image src={(hoverIndex === startIndex + index) ? card.back : card.front} alt="Logo" width={407} height={287} />
                     </div>
                 </div>
             ))}
