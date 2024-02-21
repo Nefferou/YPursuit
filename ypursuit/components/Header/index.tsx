@@ -1,8 +1,8 @@
-import LogoYPursuit from '../LogoYPursuit';
 import HeaderNav from '../HeaderNav';
 import IconList from '../IconList';
+import Logo from '@/assets/images/logoBlack.svg';
+import Image from 'next/image';
 
-import classes from './index.module.css';
 
 interface HeaderProps {
   currentSection: number;
@@ -10,13 +10,14 @@ interface HeaderProps {
   setCurrentSection: (sectionNumber: number) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentSection, scrollToSection,setCurrentSection }) => {
+const Header: React.FC<HeaderProps> = ({ currentSection, scrollToSection, setCurrentSection }) => {
   return (
-    <div className={classes.header} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000 }}>
-      <div className={classes.headerTwo}>
-        <LogoYPursuit />
-        <IconList
-        />
+    <div className="flex justify-between items-center py-4 px-6 bg-white fixed top-0 w-full z-50">
+      <div className="flex h-20">
+        <div className="flex justify-center items-end">
+          <Image src={Logo} alt="Logo" />
+        </div>
+        <IconList />
       </div>
       <HeaderNav
         currentSection={currentSection}

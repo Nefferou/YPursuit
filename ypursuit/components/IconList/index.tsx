@@ -1,14 +1,26 @@
-import Image from 'next/image';
-import Logo from '@/assets/images/insta.svg';
+import Image, { StaticImageData } from 'next/image';
+import Logo from '@/assets/images/Insta.svg';
 
-import classes from './index.module.css';
+interface IconProps {
+  src: StaticImageData;
+  alt: string;
+}
 
-function IconList() {
-    return (
-        <div className={classes.iconList}>
-            <Image src={Logo} alt="Logo" />
+const icons = [
+  { src: Logo, alt: 'Logo' },
+  // Add more icons here as needed
+];
+
+const IconList: React.FC = () => {
+  return (
+    <div className="flex justify-start items-end gap-2 ml-6">
+      {icons.map((icon: IconProps, index: number) => (
+        <div key={index}>
+          <Image src={icon.src} alt={icon.alt} />
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default IconList;

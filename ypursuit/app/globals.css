@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    margin: 0;
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.custom-button {
+  @apply relative overflow-hidden inline-block cursor-pointer;
+}
+
+.custom-button:before {
+  content: "";
+  @apply absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #000000;
 }
