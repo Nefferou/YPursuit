@@ -15,7 +15,7 @@ const HeaderClassic: React.FC = () => {
         </div>
         <IconList />
       </div>
-      <HeaderNavClassic/>
+      <HeaderNavClassic />
     </div>
   );
 };
