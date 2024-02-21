@@ -9,7 +9,6 @@ import TikTok from "@/assets/images/icones/tiktok.svg";
 
 const Footer = () => {
     return (
-        <div className="flex justify-between items-center py-1 px-6 bg-black fixed bottom-0 w-full z-50">
             <div className="flex h-20">
                 <div className="flex  items-center">
                     <Image src={Logo} alt="Logo" />
@@ -30,7 +29,6 @@ const Footer = () => {
                     <Link href="/" className="text-white font-bold ml-20 ">@2024 YPursuit</Link> 
                 </div>
             </div>
-        </div>
     );
 };
 
