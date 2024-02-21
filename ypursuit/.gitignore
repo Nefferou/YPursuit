@@ -5,8 +5,9 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-
-# package-lock.json
+npm-debug.log*
+npm-debug.log
+npm-debug.log.*
 package-lock.json
 
 # testing

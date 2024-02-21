@@ -13,6 +13,7 @@
     "schema": "prisma/schema.prisma"
   },
   "dependencies": {
+    "framer-motion": "^11.0.5",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
