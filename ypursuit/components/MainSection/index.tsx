@@ -1,6 +1,7 @@
 'use client';
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'react';
 import Header from '../Header';
+import CharacterSlide from '../CharacterSlide';
 
 const MAX_SECTION = 6;
 
@@ -74,6 +75,27 @@ const MainSection: React.FC = () => {
           <div className="flex flex-col justify-center items-center">
             <h1 className="text-8xl">Hello</h1>
             <h2 className="text-6xl">I&apos;m YPursuit</h2>
+          </div>
+        </Slide>
+        <Slide key={3} id={3}>
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-8xl">Hello</h1>
+            <h2 className="text-6xl">Hello, cest Carlos</h2>
+          </div>
+        </Slide>
+        <Slide key={4} id={4}>
+          <CharacterSlide />
+        </Slide>
+        <Slide key={5} id={5}>
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-8xl">Hello</h1>
+            <h2 className="text-6xl">Hello, cest Carlos</h2>
+          </div>
+        </Slide>
+        <Slide key={6} id={6}>
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-8xl">Hello</h1>
+            <h2 className="text-6xl">Hello, cest Carlos</h2>
           </div>
         </Slide>
       </div>
