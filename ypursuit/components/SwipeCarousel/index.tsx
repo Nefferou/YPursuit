@@ -1,19 +1,19 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import AB from '@/assets/images/teams/AB.svg';
-import AV from '@/assets/images/teams/AV.svg';
-import CB from '@/assets/images/teams/CB.svg';
-import CV from '@/assets/images/teams/CV.svg';
-import EB from '@/assets/images/teams/EB.svg';
-import JF from '@/assets/images/teams/JF.svg';
-import LL from '@/assets/images/teams/LL.svg';
-import MJ from '@/assets/images/teams/MJ.svg';
-import MM from '@/assets/images/teams/MM.svg';
-import QS from '@/assets/images/teams/QS.svg';
-import RC from '@/assets/images/teams/RC.svg';
-import SC from '@/assets/images/teams/SC.svg';
-import YE from '@/assets/images/teams/YE.svg';
+import AB from '@/assets/images/teams/AB.png';
+import AV from '@/assets/images/teams/AV.png';
+import CB from '@/assets/images/teams/CB.png';
+import CV from '@/assets/images/teams/CV.png';
+import EB from '@/assets/images/teams/EB.png';
+import JF from '@/assets/images/teams/JF.png';
+import LL from '@/assets/images/teams/LL.png';
+import MJ from '@/assets/images/teams/MJ.png';
+import MM from '@/assets/images/teams/MM.png';
+import QS from '@/assets/images/teams/QS.png';
+import RC from '@/assets/images/teams/RC.png';
+import SC from '@/assets/images/teams/SC.png';
+import YE from '@/assets/images/teams/YE.png';
 
 const images = [
     { src: AB, alt: 'AB' },
