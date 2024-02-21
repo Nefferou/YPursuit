@@ -43,7 +43,10 @@ const SimpleButton = ({ children, handleClick, styles, type, title, disabled, ba
             >
                 <div className="flex items-center justify-center flex-row">
                     {children}
-                    <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                    {
+                        icon &&
+                        <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                    }
                 </div>
             </button>
         case 'white':
@@ -56,7 +59,10 @@ const SimpleButton = ({ children, handleClick, styles, type, title, disabled, ba
             >
                 <div className="flex items-center justify-center flex-row">
                     {children}
-                    <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                    {
+                        icon &&
+                        <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                    }
                 </div>
             </button>
         default:
@@ -69,7 +75,10 @@ const SimpleButton = ({ children, handleClick, styles, type, title, disabled, ba
             >
                 <div className="flex items-center justify-center flex-row">
                     {children}
-                    <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                    {
+                        icon &&
+                        <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                    }
                 </div>
             </button>
     }
@@ -90,7 +99,10 @@ const DoubleButton = ({ children, handleClick, type, title, disabled, background
                 <span className="relative group-hover:text-black transition duration-300 ease-out text-white">
                     <div className="flex items-center justify-center flex-row">
                         {children}
-                        <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                        {
+                            icon &&
+                            <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                        }
                     </div>
                 </span>
             </button>
@@ -107,7 +119,10 @@ const DoubleButton = ({ children, handleClick, type, title, disabled, background
                 <span className="relative group-hover:text-black transition duration-300 ease-out">
                     <div className="flex items-center justify-center flex-row">
                         {children}
-                        <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                        {
+                            icon &&
+                            <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                        }
                     </div>
                 </span>
             </button>
@@ -124,7 +139,10 @@ const DoubleButton = ({ children, handleClick, type, title, disabled, background
                 <span className="relative group-hover:text-black transition duration-300 ease-out">
                     <div className="flex items-center justify-center flex-row">
                         {children}
-                        <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                        {
+                            icon &&
+                            <Image src={icon || ""} alt="icon" width={20} height={20} className="ml-2" />
+                        }
                     </div>
                 </span>
             </button>

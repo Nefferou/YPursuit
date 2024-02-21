@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'react';
 import Header from '../Header';
 import CharacterSlide from '../CharacterSlide';
+import Hero from '../Hero';
 
 const MAX_SECTION = 6;
 
@@ -66,10 +67,7 @@ const MainSection: React.FC = () => {
       <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
       <div className="slideContainer">
         <Slide key={1} id={1}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Hero />
         </Slide>
         <Slide key={2} id={2}>
           <div className="flex flex-col justify-center items-center">
