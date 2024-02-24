@@ -17,9 +17,6 @@ let rooms = []; // Array to store rooms
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    // ------------------ Emit list of rooms to new users ------------------
-    socket.emit('update_rooms', rooms);
-
     // ------------------ Handle room creation ------------------
     socket.on('create_room', ({ name, maxPlayers, difficulty }) => {
         const roomId = generateRoomId();
@@ -43,6 +40,11 @@ io.on('connection', (socket) => {
         } else {
             socket.emit('room_join_response', false);
         }
+    });
+
+    // ------------------ Handle retrieve rooms ------------------
+    socket.on('update_rooms', () => {
+        socket.emit('update_rooms', rooms);
     });
 
     // ------------------ Handle retrieve info of a room ------------------
