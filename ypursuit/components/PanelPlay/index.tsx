@@ -1,7 +1,7 @@
 'use client';
-import React from 'react';
+import React, { use } from 'react';
 import Button from '../ui/Buttons/Button';
-import { redirect } from 'next/dist/server/api-utils';
+import {useRouter} from 'next/navigation';
 import Image from 'next/image';
 import CardHawky from '@/assets/images/card/hawkyFace.svg';
 
@@ -13,13 +13,14 @@ interface PanelPlayProps {
 
 
 const PanelPlay = ({  design }: PanelPlayProps) => {
+    const router = useRouter();
     switch (design) {
         case 'solo':
             return (
                 <div className='flex flex-col items-center h-2/5 m-20'>
                     <Image src={CardHawky} alt="solo" />
                     <Button
-                        handleClick={() => console.log('click')}
+                        handleClick={() => router.push('/solo')}
                         title="title"
                         design="double"
                         backgroundColor='white'
@@ -33,7 +34,7 @@ const PanelPlay = ({  design }: PanelPlayProps) => {
                 <div className='flex flex-col items-center h-2/5 m-20'>
                     <Image src={CardHawky} alt="solo" />
                     <Button
-                        handleClick={() => console.log('click')}
+                        handleClick={() => router.push('/multi')}
                         title="title"
                         design="double"
                         backgroundColor='white'
