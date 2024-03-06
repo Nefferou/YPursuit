@@ -7,7 +7,6 @@ import Rusty from '../../assets/images/character/rusty.svg';
 import Lully from '../../assets/images/character/lully.svg';
 import HeroBg from '../../assets/images/hero.svg';
 import Logo from '../../assets/images/logoWhite.svg';
-import { redirect } from 'next/dist/server/api-utils';
 
 const Hero: React.FC = () => {
     const handleClick = () => {

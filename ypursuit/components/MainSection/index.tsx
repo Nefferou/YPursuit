@@ -89,8 +89,6 @@ const MainSection: React.FC = () => {
         <Slide key={6} id={6}>
           <Contact />
         </Slide>
-      </div>
-      <div className="flex justify-between items-center py-1 px-6 bg-black fixed bottom-0  w-full z-50">
         <Footer />
       </div>
     </section >

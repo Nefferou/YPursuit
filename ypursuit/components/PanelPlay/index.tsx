@@ -18,7 +18,7 @@ const PanelPlay = ({  design }: PanelPlayProps) => {
         case 'solo':
             return (
                 <div className='flex flex-col items-center h-2/5 m-20'>
-                    <Image src={CardHawky} alt="solo" />
+                    <Image src={CardHawky} alt="solo" width={200} height={200} />
                     <Button
                         handleClick={() => router.push('/solo')}
                         title="title"
@@ -32,7 +32,7 @@ const PanelPlay = ({  design }: PanelPlayProps) => {
         case 'multi':
             return (
                 <div className='flex flex-col items-center h-2/5 m-20'>
-                    <Image src={CardHawky} alt="solo" />
+                    <Image src={CardHawky} alt="solo" width={200} height={200} />
                     <Button
                         handleClick={() => router.push('/multi')}
                         title="title"

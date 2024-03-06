@@ -12,16 +12,16 @@ const Footer = () => {
         <div className="flex justify-between items-center py-1 px-6 bg-black fixed bottom-0 w-full h-16 z-50">
             <div className="flex h-20">
                 <div className="flex  items-center">
-                    <Image src={Logo} alt="Logo" />
+                    <Image src={Logo} alt="Logo" width={100} height={100} />
                 </div>
                 <div className="flex  items-center">
-                    <Image src={Twitter} alt="Twitter" />
+                    <Image src={Twitter} alt="Twitter" width={100} height={100} />
                 </div>
                 <div className="flex items-center">
-                    <Image src={Instagram} alt="Instagram" />
+                    <Image src={Instagram} alt="Instagram" width={100} height={100} />
                 </div>
                 <div className="flex items-center">
-                    <Image src={TikTok} alt="TikTok" />
+                    <Image src={TikTok} alt="TikTok" width={100} height={100} />
                 </div>
                 <div className="flex items-center">
                     <Link href="/" className="text-white font-bold ml-10 ">Mentions légales</Link>
