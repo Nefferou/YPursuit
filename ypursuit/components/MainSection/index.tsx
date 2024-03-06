@@ -3,6 +3,11 @@ import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'reac
 import Header from '../Header';
 import CharacterSlide from '../CharacterSlide';
 import Footer from '../Footer';
+import Hero from '../Hero';
+import ProjectSection from '../Project';
+import SwipeCarousel from '../SwipeCarousel';
+import Goodies from '../Goodies';
+import Contact from '../Contact';
 
 const MAX_SECTION = 6;
 
@@ -12,7 +17,7 @@ interface SlideProps {
 }
 
 const Slide: React.FC<SlideProps> = ({ id, children }) => (
-  <div id={`slide${id}`} className="w-screen h-screen flex justify-center items-center border-2 border-black">
+  <div id={`slide${id}`} className="w-screen h-screen flex justify-center items-center">
     {children}
   </div>
 );
@@ -67,37 +72,22 @@ const MainSection: React.FC = () => {
       <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
       <div className="slideContainer">
         <Slide key={1} id={1}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Hero />
         </Slide>
         <Slide key={2} id={2}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">I&apos;m YPursuit</h2>
-          </div>
+          <ProjectSection />
         </Slide>
         <Slide key={3} id={3}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <SwipeCarousel />
         </Slide>
         <Slide key={4} id={4}>
           <CharacterSlide />
         </Slide>
         <Slide key={5} id={5}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Goodies />
         </Slide>
         <Slide key={6} id={6}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Contact />
         </Slide>
       </div>
       <div className="flex justify-between items-center py-1 px-6 bg-black fixed bottom-0  w-full z-50">

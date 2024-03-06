@@ -1,6 +1,5 @@
 import masterPicture from "../../assets/images/sam 1.png";
 import Image from "next/image";
-import classes from "./index.module.css";
 
 type Props = {
     name: string;
@@ -11,7 +10,7 @@ type Props = {
 function Card({ name, description }: Props) {
     return (
         <div>
-            <Image src={masterPicture} alt="Sam" />
+            <Image src={masterPicture} alt="Sam" width={100} height={100} />
             <div>
                 <h2>{name}</h2>
                 <p>Présente</p>

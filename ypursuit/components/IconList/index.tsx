@@ -16,7 +16,7 @@ const IconList: React.FC = () => {
     <div className="flex justify-start items-end gap-2 ml-6">
       {icons.map((icon: IconProps, index: number) => (
         <div key={index}>
-          <Image src={icon.src} alt={icon.alt} />
+          <Image src={icon.src} alt={icon.alt} width={30} height={30} />
         </div>
       ))}
     </div>
