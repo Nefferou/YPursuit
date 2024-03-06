@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/ui/Navbar'
 import Provider from '@/components/ui/Provider'
+import Footer from '@/components/Footer'
 
 const inter = Montserrat({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Provider>
           {children}
         </Provider>
+        <Footer />
       </body>
     </html>
   )
