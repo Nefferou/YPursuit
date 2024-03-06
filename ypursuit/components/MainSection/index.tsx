@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'react';
 import Header from '../Header';
 import CharacterSlide from '../CharacterSlide';
+import Footer from '../Footer';
 import Hero from '../Hero';
 import ProjectSection from '../Project';
 import SwipeCarousel from '../SwipeCarousel';
@@ -89,7 +90,11 @@ const MainSection: React.FC = () => {
           <Contact />
         </Slide>
       </div>
-    </section>
+      <div className="flex justify-between items-center py-1 px-6 bg-black fixed bottom-0  w-full z-50">
+        <Footer />
+      </div>
+    </section >
+
   );
 };
 
