@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import CardArtchy from '@/assets/images/card/artchyPile.svg';
-import CardArtchyFace from '@/assets/images/card/artchyFace.svg';
-import CardBuzzy from '@/assets/images/card/buzzyPile.svg';
-import CardDally from '@/assets/images/card/dallyPile.svg';
-import CardBuzzyFace from '@/assets/images/card/buzzyFace.svg';
-import CardDallyFace from '@/assets/images/card/dallyFace.svg';
-import CardHawky from '@/assets/images/card/hawkyPile.svg';
-import CardHawkyFace from '@/assets/images/card/hawkyFace.svg';
-import CardKroky from '@/assets/images/card/krokyPile.svg';
-import CardKrokyFace from '@/assets/images/card/krokyFace.svg';
-import CardLully from '@/assets/images/card/lulyPile.svg';
-import CardLullyFace from '@/assets/images/card/lulyFace.svg';
+import CardArtchy from '@/assets/images/card/artchyBack.png';
+import CardArtchyFace from '@/assets/images/card/artchyFront.png';
+import CardBuzzy from '@/assets/images/card/buzzyBack.png';
+import CardBuzzyFace from '@/assets/images/card/buzzyFront.png';
+import CardDally from '@/assets/images/card/dallyBack.png';
+import CardDallyFace from '@/assets/images/card/dallyFront.png';
+import CardHawky from '@/assets/images/card/hawkyBack.png';
+import CardHawkyFace from '@/assets/images/card/hawkyFront.png';
+import CardWapy from '@/assets/images/card/wapyBack.png';
+import CardWapyFace from '@/assets/images/card/wapyFront.png';
+import CardLuly from '@/assets/images/card/lulyBack.png';
+import CardLulyFace from '@/assets/images/card/lulyFront.png';
 
 const CharacterSlide = () => {
     const [hoverIndex, setHoverIndex] = useState(-1);
@@ -30,8 +30,8 @@ const CharacterSlide = () => {
         { front: CardBuzzy, back: CardBuzzyFace },
         { front: CardDally, back: CardDallyFace },
         { front: CardHawky, back: CardHawkyFace },
-        { front: CardKroky, back: CardKrokyFace },
-        { front: CardLully, back: CardLullyFace },
+        { front: CardWapy, back: CardWapyFace },
+        { front: CardLuly, back: CardLulyFace },
     ];
 
     const showNextImages = () => {
@@ -57,7 +57,7 @@ const CharacterSlide = () => {
                     onMouseEnter={() => handleMouseEnter(startIndex + index)}
                     onMouseLeave={handleMouseLeave}>
                     <div className={` ${hoverIndex === startIndex + index && '[transform:rotateY(180deg)]'}`}>
-                        <Image src={(hoverIndex === startIndex + index) ? card.back : card.front} alt="Logo" />
+                        <Image src={(hoverIndex === startIndex + index) ? card.back : card.front} alt="Logo" width={407} height={287} />
                     </div>
                 </div>
             ))}
