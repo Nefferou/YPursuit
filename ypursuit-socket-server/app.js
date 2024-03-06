@@ -18,14 +18,14 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     // ------------------ Handle room creation ------------------
-    socket.on('create_room', ({ name, maxPlayers, difficulty }) => {
+    socket.on('create_room', ({ name, maxPlayers, difficulty, isPrivate }) => {
         const roomId = generateRoomId();
-        const room = { id: roomId, name, maxPlayers, difficulty, players: [{id: socket.id, isHost: true}] };
+        const room = { id: roomId, name, maxPlayers, difficulty, isPrivate, players: [{id: socket.id, isHost: true}] };
         rooms.push(room);
         console.log(`Room created with ID: ${roomId}`);
         socket.emit('join_room', { roomId });
         socket.emit('room_created', roomId);
-        io.emit('update_rooms', rooms);
+        io.emit('update_rooms', rooms.filter(room => !room.isPrivate));
     });
 
     // ------------------ Handle joining a room ------------------
@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
 
     // ------------------ Handle retrieve rooms ------------------
     socket.on('update_rooms', () => {
-        socket.emit('update_rooms', rooms);
+        socket.emit('update_rooms', rooms.filter(room => !room.isPrivate));
     });
 
     // ------------------ Handle retrieve info of a room ------------------
