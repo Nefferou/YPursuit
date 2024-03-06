@@ -9,10 +9,10 @@ import Image from "next/image"
 const Goodies = () => {
     return <div id="slide5" className="w-full h-screen flex justify-center items-center flex-col bg-greenPrimary border-black border-2">
         <div className="w-full flex justify-start items-center pl-12 pb-12">
-            <h1 className="text-4xl font-bold text-white">GOODIES</h1>
+            <h2 className="text-4xl font-bold text-white">GOODIES</h2>
         </div>
-        <div className="w-full grid gap-4 p-8">
-            <div className="row-start-2 col-start-1 flex items-center justify-center">
+        <div className="w-full grid gap-4 p-8 grid-cols-4">
+            <div className="flex items-center justify-center">
                 <Image
                     src={cle}
                     alt="cle"
@@ -20,7 +20,7 @@ const Goodies = () => {
                     height={200}
                 />
             </div>
-            <div className="row-start-2 col-start-2 flex items-center justify-center">
+            <div className="flex items-center justify-center">
                 <Image
                     src={coque}
                     alt="coque"
@@ -28,7 +28,7 @@ const Goodies = () => {
                     height={200}
                 />
             </div>
-            <div className="row-start-2 col-start-3 flex items-center justify-center">
+            <div className="flex items-center justify-center">
                 <Image
                     src={gourde}
                     alt="gourde"
@@ -36,7 +36,7 @@ const Goodies = () => {
                     height={200}
                 />
             </div>
-            <div className="row-start-2 col-start-4 flex items-center justify-center">
+            <div className="flex items-center justify-center">
                 <Button handleClick={() => console.log('Button')}
                     title="Button"
                     design="simple"
