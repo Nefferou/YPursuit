@@ -5,6 +5,8 @@ import CharacterSlide from '../CharacterSlide';
 import Hero from '../Hero';
 import ProjectSection from '../Project';
 import SwipeCarousel from '../SwipeCarousel';
+import Goodies from '../Goodies';
+import Contact from '../Contact';
 
 const MAX_SECTION = 6;
 
@@ -81,16 +83,10 @@ const MainSection: React.FC = () => {
           <CharacterSlide />
         </Slide>
         <Slide key={5} id={5}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Goodies />
         </Slide>
         <Slide key={6} id={6}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Contact />
         </Slide>
       </div>
     </section>
