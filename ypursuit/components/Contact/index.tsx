@@ -1,7 +1,25 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Button from '../ui/Buttons/Button'
+import { InputContact, TextAreaContact } from '../ui/Inputs'
 
 const Contact = () => {
+    const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
+
+    const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
+    }
+
+    const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setMessage(e.target.value)
+    }
+
+    const handleSubmit = () => {
+        console.log('Click')
+    }
+
     return (
         <div id="slide6" className="w-full h-screen flex justify-center items-center flex-col border-black border-2">
             <div className="w-full flex justify-start items-center pl-12 pb-12">
@@ -16,21 +34,32 @@ const Contact = () => {
                     </p>
                 </div>
                 <div className='flex items-center justify-center'>
-                    <form>
-                        <div className='flex flex-col gap-2'>
-                            <input type='text' placeholder='Mail' />
-                            <textarea placeholder='Message' />
-                            <Button
-                                handleClick={() => console.log('Button')}
-                                title="Button"
-                                design="simple"
-                                backgroundColor="green"
-                                type="button"
-                                disabled={false}
-                            >
-                                ENVOYER
-                            </Button>
-                        </div>
+                    <form className='flex flex-col gap-2'>
+                        <InputContact
+                            type="email"
+                            label="VOTRE MAIL"
+                            value={email}
+                            name="email"
+                            placeholder="VOTRE MAIL"
+                            error=""
+                            onChange={handleEmail}
+                            disabled={false}
+                        />
+                        <TextAreaContact
+                            value={message}
+                            onChange={handleMessage}
+                            disabled={false}
+                        />
+                        <Button
+                            handleClick={handleSubmit}
+                            title="Button"
+                            design="simple"
+                            backgroundColor="green"
+                            type="button"
+                            disabled={false}
+                        >
+                            ENVOYER
+                        </Button>
                     </form>
                 </div>
             </div>
