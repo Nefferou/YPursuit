@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
         };
         rooms.push(room);
         console.log(`Room created with ID: ${roomId}`);
-        socket.emit('join_room', { roomId });
+        socket.join(roomId);
         socket.emit('room_created', roomId);
         io.emit('update_rooms', rooms.filter(room => !room.isPrivate));
     });
@@ -136,7 +136,6 @@ io.on('connection', (socket) => {
         const room = rooms.find(room => room.id === roomId);
         if (room) {
             room.answers = room.answers || {};
-            console.log(answerIndex);
             room.answers.push({ playerId: socket.id, answer: answerIndex });
 
             if (room.answers.length === room.players.length) {
@@ -145,6 +144,22 @@ io.on('connection', (socket) => {
                 room.correctAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
 
                 io.in(roomId).emit('update_room', room);
+
+                // Wait before moving to the next question
+                setTimeout(() => {
+                    room.currentQuestionIndex++;
+
+                    room.answers = [];
+                    room.isAnswering = true;
+
+                    // Check if there are more questions
+                    if (room.currentQuestionIndex < room.questions.length) {
+                        io.in(roomId).emit('update_room', room);
+                    } else {
+                        room.status = "FINISHED";
+                        io.in(roomId).emit('update_room', room);
+                    }
+                }, 5000); // 5000 milliseconds = 5 seconds
             }
         }
     });

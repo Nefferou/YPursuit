@@ -47,23 +47,43 @@ const RoomSection = () => {
     const roomId = params.roomId as string;
     const [room, setRoom] = useState({} as Room);
     const [isCurrentUserHost, setIsCurrentUserHost] = useState(false);
+    const [tempIndex, setTempIndex] = useState(0);
     const [hasAnswered, setHasAnswered] = useState(false);
 
     useEffect(() => {
-        socket = socket = getSocket();
+        socket = getSocket();
 
+        const handleRoomUpdate = (updatedRoom: Room) => {
+            setRoom(updatedRoom);
+            setIsCurrentUserHost(updatedRoom.players?.some(player => player.id === socket.id && player.isHost));
+
+            if (tempIndex < updatedRoom.currentQuestionIndex) {
+                setHasAnswered(false);
+                setTempIndex(updatedRoom.currentQuestionIndex);
+            }
+
+            setTempIndex(updatedRoom.currentQuestionIndex);
+        };
+
+        const handleKicked = () => {
+            router.push('/play/multiplayer');
+        };
+
+        // Set up event listeners
+        socket.on('update_room', handleRoomUpdate);
+        socket.on('kicked', handleKicked);
+
+        // Emit initial events
         socket.emit('retrieve_room_info', { roomId });
 
-        socket.on('update_room', (updatedRoom) => {
-            setRoom(updatedRoom);
-            setIsCurrentUserHost(room.players?.some(player => player.id === socket.id && player.isHost));
-        });
+        // Clean up function to remove event listeners
+        return () => {
+            socket.off('update_room', handleRoomUpdate);
+            socket.off('kicked', handleKicked);
+        };
 
-        socket.on('kicked', () => {
-            router.push('/play/multiplayer');
-        });
+    }, [roomId, router]);
 
-    }, [room.players, roomId, router]);
 
     const handleLeave = () => {
         socket.emit('leave_room', { roomId });
@@ -78,7 +98,6 @@ const RoomSection = () => {
         try {
             const response = await fetch(`http://localhost:3001/questions?maxRounds=${room.maxRounds}&theme=${room.theme}&difficulty=${room.difficulty}`);
             const questions = await response.json();
-            console.log('Questions after fetch: ', questions);
             socket.emit('start_game', { roomId, questions });
         } catch (error) {
             console.error("Failed to fetch questions:", error);
