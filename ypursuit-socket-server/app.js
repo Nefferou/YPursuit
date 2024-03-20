@@ -18,9 +18,19 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     // ------------------ Handle room creation ------------------
-    socket.on('create_room', ({ name, maxPlayers, difficulty, isPrivate }) => {
+    socket.on('create_room', ({ name, maxPlayers, maxRounds, theme, difficulty, isPrivate }) => {
         const roomId = generateRoomId();
-        const room = { id: roomId, name, maxPlayers, difficulty, isPrivate, players: [{id: socket.id, isHost: true}] };
+        const room = {
+            id: roomId,
+            name,
+            maxPlayers,
+            maxRounds,
+            theme,
+            difficulty,
+            isPrivate,
+            status: "WAITING",
+            players: [{id: socket.id, isHost: true}]
+        };
         rooms.push(room);
         console.log(`Room created with ID: ${roomId}`);
         socket.emit('join_room', { roomId });
