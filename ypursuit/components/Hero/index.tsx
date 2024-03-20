@@ -13,7 +13,7 @@ const Hero = () => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push('/jouer');
+        router.push('/play');
     }
 
     return (

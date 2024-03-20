@@ -3,18 +3,18 @@ import { ChangeEvent } from "react";
 interface InputContactProps {
     type: 'text' | 'email' | 'number' | 'password',
     label: string,
-    value: string | number,
+    value?: string | number,
     name: string,
     placeholder: string,
     error: string,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
     disabled: boolean,
 }
 
 const InputContact = ({ type, label, value, name, placeholder, error, onChange, disabled }: InputContactProps) => {
     return (
         <div className="border-2 rounded-md">
-            <label className="bg-greenPrimary font-bold p-3 border-2 rounded-md text-white">VOTRE MAIL</label>
+            <label className="bg-greenPrimary font-bold p-3 border-2 rounded-md text-white">{label}</label>
             <input
                 type={type}
                 id={label}
