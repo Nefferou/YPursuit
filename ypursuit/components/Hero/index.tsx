@@ -7,11 +7,15 @@ import Rusty from '../../assets/images/character/rusty.svg';
 import Lully from '../../assets/images/character/lully.svg';
 import HeroBg from '../../assets/images/hero.svg';
 import Logo from '../../assets/images/logoWhite.svg';
+import { useRouter } from 'next/navigation';
 
-const Hero: React.FC = () => {
+const Hero = () => {
+    const router = useRouter();
+
     const handleClick = () => {
-        console.log('click');
+        router.push('/jouer');
     }
+
     return (
         <div className="grid grid-cols-3 grid-rows-3 h-screen w-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url(${HeroBg})` }}>
             <Image src={Rusty} alt="Rusty" width={400} height={400} className="row-start-3 col-start-1 self-end justify-self-start" />
