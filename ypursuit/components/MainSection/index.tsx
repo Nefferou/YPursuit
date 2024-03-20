@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'react';
 import Header from '../Header';
 import CharacterSlide from '../CharacterSlide';
+import Footer from '../Footer';
 import Hero from '../Hero';
 import ProjectSection from '../Project';
 import SwipeCarousel from '../SwipeCarousel';
@@ -88,8 +89,10 @@ const MainSection: React.FC = () => {
         <Slide key={6} id={6}>
           <Contact />
         </Slide>
+        <Footer />
       </div>
-    </section>
+    </section >
+
   );
 };
 
