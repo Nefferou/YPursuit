@@ -3,7 +3,7 @@ import React, { use } from 'react';
 import Button from '../ui/Buttons/Button';
 import {useRouter} from 'next/navigation';
 import Image from 'next/image';
-import CardHawky from '@/assets/images/card/hawkyFace.svg';
+import CardHawky from '@/assets/images/card/hawkyFront.png';
 
 type PanelDesignType = 'solo' | 'multi';
 
