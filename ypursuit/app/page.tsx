@@ -1,11 +1,9 @@
-import MainSection from '../components/MainSection';
-import Footer from '../components/Footer';
+import MainSection from '../components/Landing/MainSection';
 
 export default function Home() {
   return (
     <main>
       <MainSection />
-      
     </main>
   );
 }

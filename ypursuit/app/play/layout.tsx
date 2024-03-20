@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import Provider from '@/components/ui/Provider'
-import HeaderClassic from '@/components/HeaderClassic'
-import Footer from '@/components/Footer'
+import HeaderClassic from '@/components/Headers/HeaderClassic'
+import Footer from '@/components/ui/Footer'
 
 const inter = Montserrat({ subsets: ['latin'] })
 

@@ -1,6 +1,6 @@
 'use client'
 
-import Button from "../ui/Buttons/Button"
+import Button from "../../ui/Buttons/Button"
 import cle from "@/assets/images/goodies/goodiesCle.png"
 import coque from "@/assets/images/goodies/goodiesCoque.png"
 import gourde from "@/assets/images/goodies/goodiesGourde.png"

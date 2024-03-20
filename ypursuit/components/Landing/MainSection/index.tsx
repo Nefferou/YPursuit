@@ -1,8 +1,8 @@
 'use client';
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'react';
-import Header from '../Header';
+import Header from '../../Headers/Header';
 import CharacterSlide from '../CharacterSlide';
-import Footer from '../Footer';
+import Footer from '../../ui/Footer';
 import Hero from '../Hero';
 import ProjectSection from '../Project';
 import SwipeCarousel from '../SwipeCarousel';

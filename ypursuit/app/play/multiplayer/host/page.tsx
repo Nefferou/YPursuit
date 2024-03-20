@@ -1,6 +1,6 @@
 'use client';
 
-import CreateRoomSection from "@/components/CreateRoomSection";
+import CreateRoomSection from "@/components/Play/CreateRoomSection";
 import {useRouter} from "next/navigation";
 
 export default function Home() {

@@ -1,5 +1,5 @@
 import HeaderNav from '../HeaderNav';
-import IconList from '../IconList';
+import IconList from '../../ui/IconList';
 import Logo from '@/assets/images/logoBlack.svg';
 import Image from 'next/image';
 
