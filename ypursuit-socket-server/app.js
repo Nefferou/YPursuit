@@ -112,6 +112,20 @@ io.on('connection', (socket) => {
         }
     });
 
+    // ------------------ Handle starting a game ------------------
+    socket.on('start_game', ({ roomId, questions }) => {
+        const room = rooms.find(room => room.id === roomId);
+        if (room) {
+            console.log(`Game started in room ${roomId}`)
+            room.status = "IN PROGRESS";
+
+            console.log(`Questions for room ${roomId}: ${questions}`)
+            room.questions = questions;
+
+            io.in(roomId).emit('game_started', { questions });
+        }
+    });
+
     // ------------------ Handle disconnection ------------------
     socket.on('disconnect', () => {
         console.log('user disconnected');
