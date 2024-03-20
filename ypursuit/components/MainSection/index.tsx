@@ -1,6 +1,13 @@
 'use client';
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from 'react';
 import Header from '../Header';
+import CharacterSlide from '../CharacterSlide';
+import Footer from '../Footer';
+import Hero from '../Hero';
+import ProjectSection from '../Project';
+import SwipeCarousel from '../SwipeCarousel';
+import Goodies from '../Goodies';
+import Contact from '../Contact';
 
 const MAX_SECTION = 6;
 
@@ -10,7 +17,7 @@ interface SlideProps {
 }
 
 const Slide: React.FC<SlideProps> = ({ id, children }) => (
-  <div id={`slide${id}`} className="w-screen h-screen flex justify-center items-center border-2 border-black">
+  <div id={`slide${id}`} className="w-screen h-screen flex justify-center items-center">
     {children}
   </div>
 );
@@ -48,6 +55,7 @@ const MainSection: React.FC = () => {
     return () => {
       if (containerRef.current) {
         containerRef.current.removeEventListener('wheel', handleWheel);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         containerRef.current.removeEventListener('keydown', handleKeyDown);
       }
     };
@@ -65,19 +73,27 @@ const MainSection: React.FC = () => {
       <Header currentSection={currentSection} scrollToSection={scrollToSection} setCurrentSection={setCurrentSection} />
       <div className="slideContainer">
         <Slide key={1} id={1}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">Hello, cest Carlos</h2>
-          </div>
+          <Hero />
         </Slide>
         <Slide key={2} id={2}>
-          <div className="flex flex-col justify-center items-center">
-            <h1 className="text-8xl">Hello</h1>
-            <h2 className="text-6xl">I&apos;m YPursuit</h2>
-          </div>
+          <ProjectSection />
         </Slide>
+        <Slide key={3} id={3}>
+          <SwipeCarousel />
+        </Slide>
+        <Slide key={4} id={4}>
+          <CharacterSlide />
+        </Slide>
+        <Slide key={5} id={5}>
+          <Goodies />
+        </Slide>
+        <Slide key={6} id={6}>
+          <Contact />
+        </Slide>
+        <Footer />
       </div>
-    </section>
+    </section >
+
   );
 };
 
