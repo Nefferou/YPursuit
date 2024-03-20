@@ -21,6 +21,16 @@ interface Room {
     isPrivate: boolean;
     status: string;
     players: Player[];
+    isAnswering: boolean;
+    questions: Question[];
+    currentQuestionIndex: 0;
+    currentCorrectAnswerIndex: 0;
+    answers: Answer[];
+}
+
+interface Answer {
+    playerId: string;
+    answer: number;
 }
 
 interface Question {
@@ -34,8 +44,8 @@ const RoomSection = () => {
     const params = useParams();
     const roomId = params.roomId as string;
     const [room, setRoom] = useState({} as Room);
-    const [gameQuestions, setGameQuestions] = useState([] as Question[]);
     const [isCurrentUserHost, setIsCurrentUserHost] = useState(false);
+    const [hasAnswered, setHasAnswered] = useState(false);
 
     useEffect(() => {
         socket = socket = getSocket();
@@ -49,10 +59,6 @@ const RoomSection = () => {
 
         socket.on('kicked', () => {
             router.push('/play/multiplayer');
-        });
-
-        socket.on('game_started', ({ questions }) => {
-            setGameQuestions(questions);
         });
 
     }, [room.players, roomId, router]);
@@ -72,10 +78,14 @@ const RoomSection = () => {
             const questions = await response.json();
             console.log('Questions after fetch: ', questions);
             socket.emit('start_game', { roomId, questions });
-            setGameQuestions(questions);
         } catch (error) {
             console.error("Failed to fetch questions:", error);
         }
+    }
+
+    const submitAnswer = (roomId: string, answerIndex: number) => {
+        socket.emit('submit_answer', { roomId, answerIndex });
+        setHasAnswered(true);
     }
 
     if (!room) return <p>Loading...</p>;
@@ -108,6 +118,34 @@ const RoomSection = () => {
                     {room.status === "IN_PROGRESS" && (
                         <div>
                             <h1>Game in progress...</h1>
+                            {room.isAnswering ? (
+                                hasAnswered ? (
+                                    <p>Waiting for other players to submit answers...</p>
+                                ) : (
+                                    <div>
+                                        <p>{room.questions[room.currentQuestionIndex].question}</p>
+                                        <ul>
+                                            {room.questions[room.currentQuestionIndex].answers.map((answer, index) => (
+                                                <li key={index}>
+                                                    <button onClick={() => submitAnswer(roomId, index)}>{answer.text}</button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )
+                            ) : (
+                                <div>
+                                    <p>Answers submitted!</p>
+                                    <ul>
+                                        {room.answers.map((ans, index) => (
+                                            <li key={index}>
+                                                Player {ans.playerId}: {room.questions[room.currentQuestionIndex].answers[ans.answer].text} {ans.answer === room.currentCorrectAnswerIndex ? ' (Correct)' : '(Incorrect)'}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p>Correct Answer: {room.questions[room.currentQuestionIndex].answers[room.currentCorrectAnswerIndex].text}</p>
+                                </div>
+                            )}
                         </div>
                     )}
                     {room.status === "FINISHED" && (
