@@ -17,8 +17,28 @@ interface Room {
     id: string;
     name: string;
     maxPlayers: number;
+    maxRounds: number;
+    theme: string;
     difficulty: string;
+    isPrivate: boolean;
+    status: string;
     players: Player[];
+    isAnswering: boolean;
+    questions: Question[];
+    currentQuestionIndex: 0;
+    currentCorrectAnswerIndex: 0;
+    answers: Answer[];
+}
+
+interface Answer {
+    playerId: string;
+    answer: number;
+}
+
+interface Question {
+    id: string;
+    question: string;
+    answers: [{ text: string, correct: boolean }];
 }
 
 const RoomSection = () => {
@@ -27,6 +47,7 @@ const RoomSection = () => {
     const roomId = params.roomId as string;
     const [room, setRoom] = useState({} as Room);
     const [isCurrentUserHost, setIsCurrentUserHost] = useState(false);
+    const [hasAnswered, setHasAnswered] = useState(false);
 
     useEffect(() => {
         socket = socket = getSocket();
@@ -53,12 +74,28 @@ const RoomSection = () => {
         socket.emit('kick_player', { roomId, playerId });
     };
 
+    const startGame = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/questions?maxRounds=${room.maxRounds}&theme=${room.theme}&difficulty=${room.difficulty}`);
+            const questions = await response.json();
+            console.log('Questions after fetch: ', questions);
+            socket.emit('start_game', { roomId, questions });
+        } catch (error) {
+            console.error("Failed to fetch questions:", error);
+        }
+    }
+
+    const submitAnswer = (roomId: string, answerIndex: number) => {
+        socket.emit('submit_answer', { roomId, answerIndex });
+        setHasAnswered(true);
+    }
+
     if (!room) return <p>Loading...</p>;
 
     return (
         <>
             {
-                room.id ? (
+                room.id && room.status === "WAITING" ? (
                     <div className='w-full'>
                         <div className='flex flex-row justify-between items-center border-2 border-gray-300 p-2 rounded-md'>
                             <p
@@ -86,6 +123,17 @@ const RoomSection = () => {
                                 </li>
                             ))}
                         </ul>
+                        {isCurrentUserHost && room.status === "WAITING" && (
+                            <Button
+                                title="Button"
+                                design="simple"
+                                handleClick={startGame}
+                                disabled={false}
+                                styles='flex justify-center items-center text-sm bg-greenPrimary'
+                            >
+                                START GAME
+                            </Button>
+                        )}
                         <Button
                             title="Button"
                             design="simple"
@@ -96,9 +144,44 @@ const RoomSection = () => {
                             LEAVE ROOM
                         </Button>
                     </div >
+                ) : room.id && room.status === "IN_PROGRESS" ? (
+                    <div>
+                        <p>Game in progress...</p>
+                        {room.isAnswering ? (
+                            hasAnswered ? (
+                                <p>Waiting for other players to submit answers...</p>
+                            ) : (
+                                <div>
+                                    <p>{room.questions[room.currentQuestionIndex].question}</p>
+                                    <ul>
+                                        {room.questions[room.currentQuestionIndex].answers.map((answer, index) => (
+                                            <li key={index}>
+                                                <button onClick={() => submitAnswer(roomId, index)}>{answer.text}</button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )
+                        ) : (
+                            <div>
+                                <p>Answers submitted!</p>
+                                <ul>
+                                    {room.answers.map((ans, index) => (
+                                        <li key={index}>
+                                            Player {ans.playerId}: {room.questions[room.currentQuestionIndex].answers[ans.answer].text} {ans.answer === room.currentCorrectAnswerIndex ? ' (Correct)' : '(Incorrect)'}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <p>Correct Answer: {room.questions[room.currentQuestionIndex].answers[room.currentCorrectAnswerIndex].text}</p>
+                            </div>
+                        )}
+                    </div>
+                ) : room.id && room.status === "FINISHED" ? (
+                    <p>Game finished</p>
                 ) : (
                     <p>Loading...</p>
-                )}
+                )
+            }
         </>
 
     );
