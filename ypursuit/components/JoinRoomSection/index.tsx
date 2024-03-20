@@ -44,6 +44,12 @@ const JoinRoom = () => {
     return (
         <div className='w-full'>
             <ul className='w-full flex flex-col gap-2 my-4'>
+                {
+                    rooms.length === 0 &&
+                    <li className='border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg'>
+                        No rooms available
+                    </li>
+                }
                 {rooms.map((room) => (
                     <li key={room.id} className='border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg'>
                         {room.name} - Players: {room.players.length}/{room.maxPlayers} - Difficulty: {room.difficulty}
