@@ -28,6 +28,11 @@ io.on('connection', (socket) => {
             theme,
             difficulty,
             isPrivate,
+            isAnswering: true,
+            questions: [],
+            answers: [],
+            currentQuestionIndex: 0,
+            currentCorrectAnswerIndex: 0,
             status: "WAITING",
             players: [{id: socket.id, isHost: true}]
         };
@@ -117,12 +122,30 @@ io.on('connection', (socket) => {
         const room = rooms.find(room => room.id === roomId);
         if (room) {
             console.log(`Game started in room ${roomId}`)
-            room.status = "IN PROGRESS";
+            room.status = "IN_PROGRESS";
 
             console.log(`Questions for room ${roomId}: ${questions}`)
             room.questions = questions;
 
-            io.in(roomId).emit('game_started', { questions });
+            io.in(roomId).emit('update_room', room);
+        }
+    });
+
+    // ------------------ Handle submitting an answer ------------------
+    socket.on('submit_answer', ({ roomId, answerIndex }) => {
+        const room = rooms.find(room => room.id === roomId);
+        if (room) {
+            room.answers = room.answers || {};
+            console.log(answerIndex);
+            room.answers.push({ playerId: socket.id, answer: answerIndex });
+
+            if (room.answers.length === room.players.length) {
+                room.isAnswering = false;
+
+                room.correctAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
+
+                io.in(roomId).emit('update_room', room);
+            }
         }
     });
 
