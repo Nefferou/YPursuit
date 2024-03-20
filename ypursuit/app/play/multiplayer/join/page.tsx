@@ -1,4 +1,4 @@
-import JoinRoomSection from "@/components/JoinRoomSection";
+import JoinRoomSection from "@/components/Play/JoinRoomSection";
 import BackButton from "@/components/ui/Buttons/BackButton";
 
 export default function Home() {

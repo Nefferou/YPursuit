@@ -1,4 +1,4 @@
-import PanelPlay from '@/components/PanelPlay';
+import PanelPlay from '@/components/Play/PanelPlay';
 
 export default function Home() {
   return (

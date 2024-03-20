@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image';
-import Button from '../ui/Buttons/Button';
-import imageUrl from '../../assets/images/teams/allTeam.png';
+import imageUrl from '@/assets/images/teams/allTeam.png';
+import Button from '@/components/ui/Buttons/Button';
 
 const ProjectSection = () => {
     return (

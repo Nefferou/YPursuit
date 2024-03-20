@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomSection from "@/components/RoomSection";
+import RoomSection from "@/components/Play/RoomSection";
 
 export default function Room() {
     return (

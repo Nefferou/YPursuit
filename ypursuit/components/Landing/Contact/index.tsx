@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import Button from '../ui/Buttons/Button'
-import { InputContact, TextAreaContact } from '../ui/Inputs'
+import Button from '../../ui/Buttons/Button'
+import { InputContact, TextAreaContact } from '../../ui/Inputs'
 
 const Contact = () => {
     const [email, setEmail] = useState('')

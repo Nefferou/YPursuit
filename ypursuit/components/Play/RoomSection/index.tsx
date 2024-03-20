@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import getSocket from "@/app/play/multiplayer/socket";
-import Button from '../ui/Buttons/Button';
+import Button from '../../ui/Buttons/Button';
 
 let socket: Socket;
 

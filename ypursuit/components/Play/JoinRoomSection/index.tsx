@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import getSocket from '@/app/play/multiplayer/socket';
 import { Socket } from 'socket.io-client';
-import { InputContact } from '../ui/Inputs';
-import Button from '../ui/Buttons/Button';
+import { InputContact } from '../../ui/Inputs';
+import Button from '../../ui/Buttons/Button';
 
 let socket: Socket;
 
