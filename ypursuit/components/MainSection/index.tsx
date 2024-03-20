@@ -55,6 +55,7 @@ const MainSection: React.FC = () => {
     return () => {
       if (containerRef.current) {
         containerRef.current.removeEventListener('wheel', handleWheel);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         containerRef.current.removeEventListener('keydown', handleKeyDown);
       }
     };

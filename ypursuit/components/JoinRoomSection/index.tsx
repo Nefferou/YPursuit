@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import getSocket from '@/app/play/multiplayer/socket';
 import { Socket } from 'socket.io-client';
+import { InputContact } from '../ui/Inputs';
+import Button from '../ui/Buttons/Button';
 
 let socket: Socket;
 
@@ -40,21 +42,42 @@ const JoinRoom = () => {
     }
 
     return (
-        <div>
-            <h3 className="text-2xl">Join a Room</h3>
-            <ul>
-                {rooms.map((room, index) => (
-                    <li key={index}>
+        <div className='w-full'>
+            <ul className='w-full flex flex-col gap-2 my-4'>
+                {rooms.map((room) => (
+                    <li key={room.id} className='border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg'>
                         {room.name} - Players: {room.players.length}/{room.maxPlayers} - Difficulty: {room.difficulty}
-                        <button onClick={() => handleJoinRoom(room.id)} style={{marginLeft: "10px"}}>
-                            Join
-                        </button>
+                        <Button
+                            title="Button"
+                            design="simple"
+                            backgroundColor="green"
+                            handleClick={() => handleJoinRoom(room.id)}
+                            disabled={false}
+                            styles='w-24 h-8 flex justify-center items-center text-sm'
+                        >
+                            JOIN
+                        </Button>
                     </li>
                 ))}
             </ul>
-            <form onSubmit={handleJoinPrivateRoom}>
-                <input name="roomId" placeholder="Enter a room ID" />
-                <button type="submit">Join Private Room</button>
+            <form onSubmit={handleJoinPrivateRoom} className='flex flex-row gap-2 w-full justify-between'>
+                <InputContact
+                    type="text"
+                    label="Code partie"
+                    name="roomId"
+                    placeholder="Entrez le code"
+                    error=""
+                    disabled={false}
+                />
+                <Button
+                    title="Button"
+                    design="simple"
+                    backgroundColor="green"
+                    type="submit"
+                    disabled={false}
+                >
+                    REJOINDRE
+                </Button>
             </form>
         </div>
     );

@@ -21,7 +21,7 @@ type BackgroundColorType = 'green' | 'white';
 
 interface ButtonProps {
     children: ReactNode,
-    handleClick: () => void,
+    handleClick?: () => void,
     backgroundColor?: BackgroundColorType,
     design?: ButtonDesignType,
     icon?: string,
