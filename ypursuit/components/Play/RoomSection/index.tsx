@@ -10,6 +10,7 @@ let socket: Socket;
 
 interface Player {
     id: string;
+    score: number;
     isHost: boolean;
 }
 
@@ -28,6 +29,7 @@ interface Room {
     currentQuestionIndex: 0;
     currentCorrectAnswerIndex: 0;
     answers: Answer[];
+    rankings: Ranking[];
 }
 
 interface Answer {
@@ -39,6 +41,12 @@ interface Question {
     id: string;
     question: string;
     answers: [{ text: string, correct: boolean }];
+}
+
+interface Ranking {
+    id: string;
+    score: number;
+    rank: number;
 }
 
 const RoomSection = () => {
@@ -211,7 +219,17 @@ const RoomSection = () => {
                         )}
                     </div>
                 ) : room.id && room.status === "FINISHED" ? (
-                    <p>Game finished</p>
+                    <div>
+                        <p>Game finished</p>
+                        <h2>Rankings:</h2>
+                        <ul>
+                            {room.rankings.map((player, index) => (
+                                <li key={index}>
+                                    {player.rank}. {player.id} - Score: {player.score}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ) : (
                     <p>Loading...</p>
                 )

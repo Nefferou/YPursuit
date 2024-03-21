@@ -34,7 +34,8 @@ io.on('connection', (socket) => {
             currentQuestionIndex: 0,
             currentCorrectAnswerIndex: 0,
             status: "WAITING",
-            players: [{id: socket.id, isHost: true}]
+            rankings: [],
+            players: [{id: socket.id, score: 0, isHost: true}]
         };
         rooms.push(room);
         console.log(`Room created with ID: ${roomId}`);
@@ -48,7 +49,7 @@ io.on('connection', (socket) => {
         const room = rooms.find(room => room.id === roomId);
         if (room && room.players.length < room.maxPlayers) {
             socket.join(roomId);
-            room.players.push({ id: socket.id, isHost: room.players.length === 0 });
+            room.players.push({ id: socket.id, score: 0, isHost: room.players.length === 0 });
             io.in(roomId).emit('update_room', room);
             io.emit('update_rooms', rooms);
             socket.emit('room_join_response', true);
@@ -142,6 +143,23 @@ io.on('connection', (socket) => {
                 room.isAnswering = false;
 
                 room.correctAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
+
+                // Calculate scores
+                room.answers.forEach(({ playerId, answer }) => {
+                    const player = room.players.find(p => p.id === playerId);
+                    if (answer === room.correctAnswerIndex) {
+                        player.score += 1;
+                    }
+                });
+
+                // Sort players by score
+                room.rankings = room.players
+                    .slice()
+                    .sort((a, b) => b.score - a.score)
+                    .map((player, index, array) => {
+                        const rank = index === 0 ? 1 : (player.score === array[index - 1].score ? array[index - 1].rank : index + 1);
+                        return { ...player, rank };
+                    });
 
                 io.in(roomId).emit('update_room', room);
 
