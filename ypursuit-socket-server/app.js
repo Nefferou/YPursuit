@@ -73,28 +73,7 @@ io.on('connection', (socket) => {
 
     // ------------------ Handle leaving a room ------------------
     socket.on('leave_room', ({ roomId }) => {
-        const room = rooms.find(room => room.id === roomId);
-        if (room) {
-            socket.leave(roomId);
-            const index = room.players.findIndex(player => player.id === socket.id);
-            let isHost = false;
-            if (index !== -1) {
-                isHost = room.players[index].isHost;
-                room.players.splice(index, 1);
-                if (room.players.length === 0) {
-                    // If no players are left, delete the room
-                    rooms = rooms.filter(room => room.id !== roomId);
-                    console.log(`Room ${roomId} is deleted`);
-                } else{
-                    if (isHost) {
-                        // Pass host to the next player
-                        room.players[0].isHost = true;
-                    }
-                }
-            }
-            io.in(roomId).emit('update_room', room);
-            io.emit('update_rooms', rooms);
-        }
+        handleLeaveGame(socket, roomId);
     });
 
     // ------------------ Handle kicking a player ------------------
@@ -203,9 +182,43 @@ io.on('connection', (socket) => {
 
     // ------------------ Handle disconnection ------------------
     socket.on('disconnect', () => {
+
+        rooms.forEach(room => {
+            const playerIndex = room.players.findIndex(player => player.id === socket.id);
+
+            if (playerIndex !== -1) {
+                handleLeaveGame(socket, room.id);
+            }
+        });
+
         console.log('user disconnected');
     });
 });
+
+const handleLeaveGame = (socket, roomId) => {
+    const room = rooms.find(room => room.id === roomId);
+    if (room) {
+        socket.leave(roomId);
+        const playerIndex = room.players.findIndex(player => player.id === socket.id);
+        let isHost = false;
+        if (playerIndex !== -1) {
+            isHost = room.players[playerIndex].isHost;
+            room.players.splice(playerIndex, 1);
+            if (room.players.length === 0) {
+                // If no players are left, delete the room
+                rooms = rooms.filter(room => room.id !== roomId);
+                console.log(`Room ${roomId} is deleted`);
+            } else{
+                if (isHost) {
+                    // Pass host to the next player
+                    room.players[0].isHost = true;
+                }
+            }
+            io.in(roomId).emit('update_room', room);
+            io.emit('update_rooms', rooms);
+        }
+    }
+}
 
 const generateRoomId = () => {
     return Math.random().toString(36).substring(7);
