@@ -173,8 +173,8 @@ io.on('connection', (socket) => {
         if (room) {
             room.status = "WAITING";
             room.currentQuestionIndex = 0;
-            room.answers = [];
-            room.isAnswering = true;
+            room.players.forEach(player => player.score = 0);
+            room.rankings = [];
 
             io.in(roomId).emit('update_room', room);
         }
