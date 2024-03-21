@@ -49,6 +49,7 @@ const RoomSection = () => {
     const [isCurrentUserHost, setIsCurrentUserHost] = useState(false);
     const [tempIndex, setTempIndex] = useState(0);
     const [hasAnswered, setHasAnswered] = useState(false);
+    const [countdown, setCountdown] = useState(0);
 
     useEffect(() => {
         socket = getSocket();
@@ -56,6 +57,15 @@ const RoomSection = () => {
         const handleRoomUpdate = (updatedRoom: Room) => {
             setRoom(updatedRoom);
             setIsCurrentUserHost(updatedRoom.players?.some(player => player.id === socket.id && player.isHost));
+
+            if (!updatedRoom.isAnswering && updatedRoom.answers.length === updatedRoom.players.length) {
+                setCountdown(5);
+                const intervalId = setInterval(() => {
+                    setCountdown((prevCountdown) => (prevCountdown > 0 ? prevCountdown - 1 : 0));
+                }, 1000);
+
+                setTimeout(() => clearInterval(intervalId), 5000);
+            }
 
             if (tempIndex < updatedRoom.currentQuestionIndex) {
                 setHasAnswered(false);
@@ -184,6 +194,11 @@ const RoomSection = () => {
                         ) : (
                             <div>
                                 <p>Answers submitted!</p>
+                                {countdown > 0 && (
+                                    <div>
+                                        <p>Next question in {countdown}...</p>
+                                    </div>
+                                )}
                                 <ul>
                                     {room.answers.map((ans, index) => (
                                         <li key={index}>
