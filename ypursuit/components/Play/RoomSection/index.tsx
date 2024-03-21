@@ -133,6 +133,10 @@ const RoomSection = () => {
         setHasAnswered(true);
     }
 
+    const handleReplay = (roomId: string) => {
+        socket.emit('replay_game', { roomId });
+    };
+
     if (!room) return <p>Loading...</p>;
 
     return (
@@ -235,6 +239,26 @@ const RoomSection = () => {
                                 </li>
                             ))}
                         </ul>
+                        <Button
+                            title="Leave"
+                            design="simple"
+                            handleClick={handleLeave}
+                            disabled={false}
+                            styles='flex justify-center items-center text-sm bg-red'
+                        >
+                            Leave
+                        </Button>
+                        {isCurrentUserHost && (
+                            <Button
+                                title="Replay"
+                                design="simple"
+                                handleClick={() => handleReplay(roomId)}
+                                disabled={false}
+                                styles='flex justify-center items-center text-sm bg-greenPrimary'
+                            >
+                                Replay
+                            </Button>
+                        )}
                     </div>
                 ) : (
                     <p>Loading...</p>

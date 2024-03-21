@@ -188,6 +188,19 @@ io.on('connection', (socket) => {
         }
     });
 
+    // ------------------ Handle replaying a game ------------------
+    socket.on('replay_game', ({ roomId }) => {
+        const room = rooms.find(room => room.id === roomId);
+        if (room) {
+            room.status = "WAITING";
+            room.currentQuestionIndex = 0;
+            room.answers = [];
+            room.isAnswering = true;
+
+            io.in(roomId).emit('update_room', room);
+        }
+    });
+
     // ------------------ Handle disconnection ------------------
     socket.on('disconnect', () => {
         console.log('user disconnected');
