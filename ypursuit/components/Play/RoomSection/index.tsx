@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import getSocket from "@/app/play/multiplayer/socket";
 import Button from '../../ui/Buttons/Button';
+import { notFound } from 'next/navigation'
 
 let socket: Socket;
 
@@ -58,12 +59,18 @@ const RoomSection = () => {
     const [tempIndex, setTempIndex] = useState(0);
     const [hasAnswered, setHasAnswered] = useState(false);
     const [countdown, setCountdown] = useState(0);
+    const [playerNotFound, setPlayerNotFound] = useState(false);
 
     useEffect(() => {
         socket = getSocket();
 
         const handleRoomUpdate = (updatedRoom: Room) => {
             setRoom(updatedRoom);
+
+            // Check if the current player is in the updated room's list of players
+            const playerIsInRoom = updatedRoom.players.some(player => player.id === socket.id);
+            setPlayerNotFound(!playerIsInRoom);
+
             setIsCurrentUserHost(updatedRoom.players?.some(player => player.id === socket.id && player.isHost));
 
             if (!updatedRoom.isAnswering && updatedRoom.answers.length === updatedRoom.players.length) {
@@ -139,11 +146,16 @@ const RoomSection = () => {
 
     if (!room) return <p>Loading...</p>;
 
+    if (playerNotFound) {
+        return notFound();
+    }
+
     return (
         <>
             {
                 room.id && room.status === "WAITING" ? (
                     <div className='w-full'>
+                        <p className="font-bold text-xl">ID du salon: {roomId}</p>
                         <div className='flex flex-row justify-between items-center border-2 border-gray-300 p-2 rounded-md'>
                             <p
                                 className='font-bold text-xl'
