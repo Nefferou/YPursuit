@@ -122,6 +122,12 @@ io.on('connection', (socket) => {
     socket.on('start_game', ({ roomId, questions }) => {
         const room = rooms.find(room => room.id === roomId);
         if (room) {
+
+            if (room.players.length < 2) {
+                io.in(roomId).emit('game_error', 'Need at least 2 players to start the game');
+                return;
+            }
+
             console.log(`Game started in room ${roomId}`)
             room.status = "IN_PROGRESS";
 

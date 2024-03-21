@@ -87,9 +87,14 @@ const RoomSection = () => {
             router.push('/play/multiplayer');
         };
 
+        const handleError = (error: string) => {
+            alert('Game error:' + error);
+        }
+
         // Set up event listeners
         socket.on('update_room', handleRoomUpdate);
         socket.on('kicked', handleKicked);
+        socket.on('game_error', handleError);
 
         // Emit initial events
         socket.emit('retrieve_room_info', { roomId });
@@ -98,9 +103,10 @@ const RoomSection = () => {
         return () => {
             socket.off('update_room', handleRoomUpdate);
             socket.off('kicked', handleKicked);
+            socket.on('game_error', handleError);
         };
 
-    }, [roomId, router]);
+    }, [tempIndex, roomId, router]);
 
 
     const handleLeave = () => {
