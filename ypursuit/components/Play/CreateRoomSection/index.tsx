@@ -15,11 +15,13 @@ const CreateRoom = () => {
         const formData = new FormData(e.currentTarget);
         const name = formData.get('name') as string;
         const maxPlayers = formData.get('maxPlayers') as string;
+        const maxRounds = formData.get('maxRounds') as string;
+        const theme = formData.get('theme') as string;
         const difficulty = formData.get('difficulty') as string;
         const isPrivate = formData.has('isPrivate') as boolean;
 
         socket = getSocket();
-        socket.emit('create_room', { name, maxPlayers, difficulty, isPrivate });
+        socket.emit('create_room', { name, maxPlayers, maxRounds, theme, difficulty, isPrivate });
 
         socket.on('room_created', (roomId: string) => {
             router.push(`/play/multiplayer/${roomId}`);
@@ -35,6 +37,26 @@ const CreateRoom = () => {
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
+                </select>
+                <select name="maxRounds" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <select name="theme" required>
+                    <option value="INFO">Informatique</option>
+                    <option value="MARKET_COM">Market Communication</option>
+                    <option value="AUDIO">Audio</option>
+                    <option value="JEUX_VIDEO">Jeux Vidéo</option>
+                    <option value="ARCHI">Architecture</option>
+                    <option value="CREA_DESIGN">Création Design</option>
                 </select>
                 <select name="difficulty" required>
                     <option value="EASY">EASY</option>
