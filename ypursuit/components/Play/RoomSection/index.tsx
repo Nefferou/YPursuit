@@ -103,7 +103,7 @@ const RoomSection = () => {
         return () => {
             socket.off('update_room', handleRoomUpdate);
             socket.off('kicked', handleKicked);
-            socket.on('game_error', handleError);
+            socket.off('game_error', handleError);
         };
 
     }, [tempIndex, roomId, router]);
