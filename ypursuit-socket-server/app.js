@@ -127,12 +127,12 @@ io.on('connection', (socket) => {
             if (room.answers.length === room.players.length) {
                 room.isAnswering = false;
 
-                room.correctAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
+                room.currentCorrectAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
 
                 // Calculate scores
                 room.answers.forEach(({ playerId, answer }) => {
                     const player = room.players.find(p => p.id === playerId);
-                    if (answer === room.correctAnswerIndex) {
+                    if (answer === room.currentCorrectAnswerIndex) {
                         player.score += 1;
                     }
                 });
