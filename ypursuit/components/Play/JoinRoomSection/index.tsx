@@ -7,18 +7,35 @@ import { Socket } from 'socket.io-client';
 import { InputContact } from '../../ui/Inputs';
 import Button from '../../ui/Buttons/Button';
 
+interface Room {
+    id: string;
+    name: string;
+    maxPlayers: number;
+    maxRounds: number;
+    theme: string;
+    difficulty: string;
+    isPrivate: boolean;
+    players: Player[];
+}
+
+interface Player {
+    id: string;
+    score: number;
+    isHost: boolean;
+}
+
 let socket: Socket;
 
 const JoinRoom = () => {
     const router = useRouter();
-    const [rooms, setRooms] = useState<any[]>([]);
+    const [rooms, setRooms] = useState([] as Room[]);
 
     useEffect(() => {
         socket = getSocket();
 
         socket.emit('update_rooms');
-        socket.on('update_rooms', (updatedRooms: string[]) => {
-            setRooms(updatedRooms);
+        socket.on('update_rooms', (updatedRooms: Room[]) => {
+            setRooms(updatedRooms.filter(room => !room.isPrivate));
         });
 
         return () => {
