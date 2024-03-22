@@ -44,6 +44,21 @@ io.on('connection', (socket) => {
         io.emit('update_rooms', rooms.filter(room => !room.isPrivate));
     });
 
+    // ------------------ Handle room update ------------------
+    socket.on('update_room', ({ roomId, theme, maxPlayers, maxRounds, difficulty, isPrivate }) => {
+        const room = rooms.find(room => room.id === roomId);
+        if (room) {
+            room.theme = theme;
+            room.maxPlayers = parseInt(maxPlayers, 10);
+            room.maxRounds = parseInt(maxRounds, 10);
+            room.difficulty = difficulty;
+            room.isPrivate = isPrivate;
+
+            io.in(roomId).emit('update_room', room);
+            io.emit('update_rooms', rooms);
+        }
+    });
+
     // ------------------ Handle joining a room ------------------
     socket.on('join_room', ({ roomId }) => {
         const room = rooms.find(room => room.id === roomId);
@@ -127,12 +142,12 @@ io.on('connection', (socket) => {
             if (room.answers.length === room.players.length) {
                 room.isAnswering = false;
 
-                room.correctAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
+                room.currentCorrectAnswerIndex = room.questions[room.currentQuestionIndex].answers.findIndex(a => a.correct);
 
                 // Calculate scores
                 room.answers.forEach(({ playerId, answer }) => {
                     const player = room.players.find(p => p.id === playerId);
-                    if (answer === room.correctAnswerIndex) {
+                    if (answer === room.currentCorrectAnswerIndex) {
                         player.score += 1;
                     }
                 });
