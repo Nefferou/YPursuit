@@ -235,6 +235,35 @@ const handleLeaveGame = (socket, roomId) => {
     }
 }
 
+const cors = require('cors')
+app.use(cors())
+const questions = require('./temp');
+
+app.get('/questions', (req, res) => {
+    const { difficulty, theme, maxRounds } = req.query;
+
+    // Convert maxRounds to a number
+    const rounds = parseInt(maxRounds, 10);
+
+    // Check if theme and difficulty are valid
+    if (!questions[theme.toUpperCase()] || !questions[theme.toUpperCase()][difficulty.toUpperCase()]) {
+        return res.status(400).json({ error: 'Invalid theme or difficulty' });
+    }
+
+    const filteredQuestions = questions[theme.toUpperCase()][difficulty.toUpperCase()];
+
+    // Function to get random questions
+    const getRandomQuestions = (questions, num) => {
+        const shuffled = [...questions].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, num);
+    };
+
+    // Select random questions based on maxRounds
+    const selectedQuestions = getRandomQuestions(filteredQuestions, rounds);
+
+    res.json(selectedQuestions);
+})
+
 const generateRoomId = () => {
     return Math.random().toString(36).substring(7);
 }
