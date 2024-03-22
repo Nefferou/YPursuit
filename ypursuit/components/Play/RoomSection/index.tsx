@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import getSocket from "@/app/play/multiplayer/socket";
 import Button from '../../ui/Buttons/Button';
@@ -50,6 +50,14 @@ interface Ranking {
     rank: number;
 }
 
+interface RoomSectionProps {
+    theme: string;
+    maxPlayers: string;
+    maxRounds: string;
+    difficulty: string;
+    isPrivate: boolean;
+}
+
 const RoomSection = () => {
     const router = useRouter();
     const params = useParams();
@@ -60,12 +68,20 @@ const RoomSection = () => {
     const [hasAnswered, setHasAnswered] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const [playerNotFound, setPlayerNotFound] = useState(false);
+    const [formData, setFormData] = useState({} as RoomSectionProps);
 
     useEffect(() => {
         socket = getSocket();
 
         const handleRoomUpdate = (updatedRoom: Room) => {
             setRoom(updatedRoom);
+            setFormData({
+                theme: updatedRoom.theme,
+                maxPlayers: updatedRoom.maxPlayers.toString(),
+                maxRounds: updatedRoom.maxRounds.toString(),
+                difficulty: updatedRoom.difficulty,
+                isPrivate: updatedRoom.isPrivate
+            })
 
             // Check if the current player is in the updated room's list of players
             const playerIsInRoom = updatedRoom.players.some(player => player.id === socket.id);
@@ -144,6 +160,34 @@ const RoomSection = () => {
         socket.emit('replay_game', { roomId });
     };
 
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+        const { name, value, type } = e.target;
+        if (type === "checkbox") {
+            const { checked } = e.target as HTMLInputElement;
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [name]: checked,
+            }));
+        } else {
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [name]: value,
+            }));
+        }
+    };
+
+    const handleUpdateRoom = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        socket.emit('update_room', { roomId,
+            theme: formData.theme,
+            maxPlayers: formData.maxPlayers,
+            maxRounds: formData.maxRounds,
+            difficulty: formData.difficulty,
+            isPrivate: formData.isPrivate
+        });
+    }
+
     if (!room) return <p>Loading...</p>;
 
     if (playerNotFound) {
@@ -164,6 +208,58 @@ const RoomSection = () => {
                                 className='font-bold text-lg bg-greenPrimary text-white p-2 rounded-md'
                             >Players: {room.players.length} / {room.maxPlayers}</p>
                         </div>
+                        {isCurrentUserHost && (
+                            <form onSubmit={handleUpdateRoom}>
+                                <div>
+                                    <p>Theme</p>
+                                    <select name="theme" required value={formData.theme} onChange={handleChange}>
+                                        <option value="INFO">Informatique</option>
+                                        <option value="MARKET_COM">Market Communication</option>
+                                        <option value="AUDIO">Audio</option>
+                                        <option value="JEUX_VIDEO">Jeux Vidéo</option>
+                                        <option value="ARCHI">Architecture</option>
+                                        <option value="CREA_DESIGN">Création Design</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p>Max Players</p>
+                                    <select name="maxPlayers" required value={formData.maxPlayers} onChange={handleChange}>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p>Max Rounds</p>
+                                    <select name="maxRounds" required value={formData.maxRounds} onChange={handleChange}>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p>Difficulty</p>
+                                    <select name="difficulty" required value={formData.difficulty} onChange={handleChange}>
+                                        <option value="EASY">EASY</option>
+                                        <option value="MEDIUM">MEDIUM</option>
+                                        <option value="HARD">HARD</option>
+                                        <option value="ALL LEVEL">ALL LEVEL</option>
+                                    </select>
+                                </div>
+                                <label>
+                                    <input type="checkbox" name="isPrivate" checked={formData.isPrivate} onChange={handleChange}/>
+                                    Private Room
+                                </label>
+                                <button type="submit">Update Room</button>
+                            </form>
+                        )}
                         <ul className='w-full flex flex-col gap-2 my-4'>
                             {room.players.map(player => (
                                 <li key={player.id} className={`border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg ${player.id === socket.id ? 'bg-greenPrimary' : ''}`}>
