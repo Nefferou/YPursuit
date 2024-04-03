@@ -3,7 +3,8 @@ import React, { use } from 'react';
 import Button from '../../ui/Buttons/Button';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import CardHawky from '@/assets/images/card/hawkyFront.png';
+import CardSolo from '@/assets/images/card/game_solo.png';
+import CardMulti from '@/assets/images/card/game_multi.png';
 
 type PanelDesignType = 'solo' | 'multi';
 
@@ -17,30 +18,34 @@ const PanelPlay = ({ design }: PanelPlayProps) => {
     switch (design) {
         case 'solo':
             return (
-                <div className='flex flex-col items-center h-2/5 m-20'>
-                    <Image src={CardHawky} alt="solo" width={200} height={200} />
-                    <Button
-                        handleClick={() => router.push('play/solo')}
-                        title="title"
-                        design="double"
-                        backgroundColor='white'
-                    >
-                        Solo
-                    </Button>
+                <div className='flex flex-col items-center h-1/5 m-20 p-10'>
+                    <Image src={CardSolo} alt="solo" width={400} height={1000} />
+                    <div className='flex flex-col items-center h-1/5 m-10'>
+                        <Button
+                            handleClick={() => router.push('play/solo')}
+                            title="title"
+                            design="double"
+                            backgroundColor='white'
+                        >
+                            Jouer en Solo
+                        </Button>
+                    </div>
                 </div>
             );
         case 'multi':
             return (
-                <div className='flex flex-col items-center h-2/5 m-20'>
-                    <Image src={CardHawky} alt="solo" width={200} height={200} />
-                    <Button
-                        handleClick={() => router.push('play/multiplayer')}
-                        title="title"
-                        design="double"
-                        backgroundColor='white'
-                    >
-                        Multi
-                    </Button>
+                <div className='flex flex-col items-center h-1/5 m-20 p-10'>
+                    <Image src={CardMulti} alt="multi" width={400} height={1000} />
+                    <div className='flex flex-col items-center h-1/5 m-10'>
+                        <Button
+                            handleClick={() => router.push('play/multiplayer')}
+                            title="title"
+                            design="double"
+                            backgroundColor='white'
+                        >
+                            Jouer en Multi
+                        </Button>
+                    </div>
                 </div>
             );
     }
