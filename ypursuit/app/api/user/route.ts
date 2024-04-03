@@ -13,12 +13,24 @@ export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
         password,
       },
     });
-    res.status(201).json(user);
+    return res.status(201).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  const { username, email, password } = req.body;
+  const user = await prisma.user.create({
+    data: {
+      username,
+      email,
+      password,
+    },
+  });
+  return res.status(201).json(user);
+}
 
 export const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -28,7 +40,7 @@ export const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
         id: String(id),
       },
     });
-    res.status(200).json(user);
+    return res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -38,12 +50,17 @@ export const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
 export const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const users = await prisma.user.findMany();
-      res.status(200).json(users);
+      return res.status(200).json(users);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ message: 'Internal server error' });
     }
   };
+
+  export async function GET(req: NextApiRequest, res: NextApiResponse){
+    const users : any = await prisma.user.findMany();
+    return res.status(200).json(users);
+  }
   
   export const getUserById = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
@@ -77,10 +94,10 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
           password,
         },
       });
-      res.status(200).json(user);
+      return res.status(200).json(user);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ message: 'Internal server error' });
     }
   };
   

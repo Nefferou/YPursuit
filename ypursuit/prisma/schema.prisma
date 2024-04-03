@@ -30,7 +30,7 @@ enum Theme {
 
 type Answer {
   answer    String
-  isCorrect Boolean
+  correct   Boolean
 }
 
 model User {
@@ -62,7 +62,7 @@ model Games {
   id                String     @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   code              String
-  difficulty        Difficulty
+  difficulty        Int
   theme             String
   numberOfQuestions Int
   status            String
@@ -72,7 +72,7 @@ model Games {
 
 model Question {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
-  difficulty Difficulty
+  difficulty Int
   question   String
   theme      String
   comment    String
