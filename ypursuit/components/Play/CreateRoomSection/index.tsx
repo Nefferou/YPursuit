@@ -59,15 +59,15 @@ const CreateRoom = () => {
                     <option value="CREA_DESIGN">Création Design</option>
                 </select>
                 <select name="difficulty" required>
-                    <option value="EASY">EASY</option>
-                    <option value="MEDIUM">MEDIUM</option>
-                    <option value="HARD">HARD</option>
-                    <option value="ALL LEVEL">ALL LEVEL</option>
+                    <option value="EASY">Facile</option>
+                    <option value="MEDIUM">Intérmédiaire</option>
+                    <option value="HARD">Difficile</option>
+                    <option value="ALL LEVEL">Tous niveaux</option>
                 </select>
                 <label>
-                    <input type="checkbox" name="isPrivate" /> Private Room
+                    <input type="checkbox" name="isPrivate" /> Salon privé
                 </label>
-                <button type="submit">Create Room</button>
+                <button type="submit">Créer Salon</button>
             </form>
         </div>
     );

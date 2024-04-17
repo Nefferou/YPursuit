@@ -64,12 +64,12 @@ const JoinRoom = () => {
                 {
                     rooms.length === 0 &&
                     <li className='border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg'>
-                        No rooms available
+                        Pas de salons disponibles
                     </li>
                 }
                 {rooms.map((room) => (
                     <li key={room.id} className='border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg'>
-                        {room.name} - Players: {room.players.length}/{room.maxPlayers} - Difficulty: {room.difficulty}
+                        {room.name} - Joueurs : {room.players.length}/{room.maxPlayers} - Difficulté: {room.difficulty}
                         <Button
                             title="Button"
                             design="simple"
@@ -78,7 +78,7 @@ const JoinRoom = () => {
                             disabled={false}
                             styles='w-24 h-8 flex justify-center items-center text-sm'
                         >
-                            JOIN
+                            Rejoindre
                         </Button>
                     </li>
                 ))}
@@ -99,7 +99,7 @@ const JoinRoom = () => {
                     type="submit"
                     disabled={false}
                 >
-                    REJOINDRE
+                    Rejoindre
                 </Button>
             </form>
         </div>
