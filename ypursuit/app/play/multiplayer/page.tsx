@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col items-center justify-evenly w-full h-full p-4">
-      <div className="h-20 w-screen bg-cover" style={{ backgroundImage: `url(${HeroBg})` }}></div>
+      <div className="h-28 w-screen bg-cover" style={{ backgroundImage: `url(${HeroBg})` }}></div>
       <h1 className="text-4xl font-extrabold underline">MultiJoueur</h1>
       <BackButton />
       <div className="flex justify-between w-full">
