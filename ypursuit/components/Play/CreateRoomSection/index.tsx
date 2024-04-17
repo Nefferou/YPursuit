@@ -51,18 +51,18 @@ const CreateRoom = () => {
                     <option value="10">10</option>
                 </select>
                 <select name="theme" required>
-                    <option value="INFO">Informatique</option>
-                    <option value="MARKET_COM">Market Communication</option>
-                    <option value="AUDIO">Audio</option>
-                    <option value="JEUX_VIDEO">Jeux Vidéo</option>
-                    <option value="ARCHI">Architecture</option>
-                    <option value="CREA_DESIGN">Création Design</option>
+                    <option value="Info">Informatique</option>
+                    <option value="Marketcom">Market Communication</option>
+                    <option value="Audiovisuel">Audio</option>
+                    <option value="Jeuxvideo">Jeux Vidéo</option>
+                    <option value="Architecture">Architecture</option>
+                    <option value="Gamedesign">Création Design</option>
                 </select>
                 <select name="difficulty" required>
-                    <option value="EASY">EASY</option>
-                    <option value="MEDIUM">MEDIUM</option>
-                    <option value="HARD">HARD</option>
-                    <option value="ALL LEVEL">ALL LEVEL</option>
+                    <option value="1">EASY</option>
+                    <option value="2">MEDIUM</option>
+                    <option value="3">HARD</option>
+                    <option value="4">ALL LEVEL</option>
                 </select>
                 <label>
                     <input type="checkbox" name="isPrivate" /> Private Room

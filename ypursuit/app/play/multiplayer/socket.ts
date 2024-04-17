@@ -5,7 +5,7 @@ let socket: Socket;
 function getSocket() {
     // Check if instance already exists
     if (!socket) {
-        socket = io('http://localhost:3001');
+        socket = io(process.env.NEXT_PUBLIC_SOCKET_SERVER_URL as string);
         console.log('Creating new socket connection');
     }
     return socket;
