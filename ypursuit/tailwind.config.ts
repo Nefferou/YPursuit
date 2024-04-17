@@ -29,6 +29,7 @@ const config: Config = {
         light: "#23B2A4",
         dark: "#3CA55B",
       },
+      grayPrimary: "#d0d0d0",
     },
     fontFamily: {
       sans: ["Montserrat", "sans-serif"],

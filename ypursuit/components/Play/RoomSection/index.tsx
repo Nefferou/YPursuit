@@ -42,8 +42,11 @@ interface Answer {
 
 interface Question {
     id: string;
+    difficulty: number;
     question: string;
-    answers: [{ text: string, correct: boolean }];
+    theme: string;
+    comment: string;
+    answers: [{ answer: string, correct: boolean }];
 }
 
 interface Ranking {
@@ -61,12 +64,12 @@ interface RoomSectionProps {
 }
 
 const themeOptions: SelectOption[] = [
-    { value: "INFO", label: "Informatique" },
-    { value: "MARKET_COM", label: "Market Communication" },
-    { value: "AUDIO", label: "Audio" },
-    { value: "JEUX_VIDEO", label: "Jeux Vidéo" },
-    { value: "ARCHI", label: "Architecture" },
-    { value: "CREA_DESIGN", label: "Création Design" },
+    { value: "Info", label: "Informatique" },
+    { value: "Marketcom", label: "Market Communication" },
+    { value: "Audiovisuel", label: "Audio" },
+    { value: "Jeuxvideo", label: "Jeux Vidéo" },
+    { value: "Architecture", label: "Architecture" },
+    { value: "Gamedesign", label: "Création Design" },
 ];
 
 const maxPlayersOptions: SelectOption[] = [
@@ -89,10 +92,10 @@ const maxRoundsOptions: SelectOption[] = [
 ];
 
 const difficultyOptions: SelectOption[] = [
-    { value: "EASY", label: "EASY" },
-    { value: "MEDIUM", label: "MEDIUM" },
-    { value: "HARD", label: "HARD" },
-    { value: "ALL LEVEL", label: "ALL LEVEL" },
+    { value: "1", label: "EASY" },
+    { value: "2", label: "MEDIUM" },
+    { value: "3", label: "HARD" },
+    { value: "4", label: "ALL LEVEL" },
 ];
 
 const RoomSection = () => {
@@ -133,7 +136,7 @@ const RoomSection = () => {
                     setCountdown((prevCountdown) => (prevCountdown > 0 ? prevCountdown - 1 : 0));
                 }, 1000);
 
-                setTimeout(() => clearInterval(intervalId), 5000);
+                setTimeout(() => clearInterval(intervalId), parseInt(process.env.NEXT_PUBLIC_SOCKET_SERVER_COOLDOWN_QUESTION || "5000"));
             }
 
             if (tempIndex < updatedRoom.currentQuestionIndex) {
@@ -181,7 +184,7 @@ const RoomSection = () => {
 
     const startGame = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/questions?maxRounds=${room.maxRounds}&theme=${room.theme}&difficulty=${room.difficulty}`);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_REST_API_URL}/questions?maxRounds=${room.maxRounds}&theme=${room.theme}&difficulty=${room.difficulty}`);
             const questions = await response.json();
             socket.emit('start_game', { roomId, questions });
         } catch (error) {
@@ -413,7 +416,7 @@ const RoomSection = () => {
                                     <ul>
                                         {room.questions[room.currentQuestionIndex].answers.map((answer, index) => (
                                             <li key={index}>
-                                                <button onClick={() => submitAnswer(roomId, index)}>{answer.text}</button>
+                                                <button onClick={() => submitAnswer(roomId, index)}>{answer.answer}</button>
                                             </li>
                                         ))}
                                     </ul>
@@ -430,11 +433,11 @@ const RoomSection = () => {
                                 <ul>
                                     {room.answers.map((ans, index) => (
                                         <li key={index}>
-                                            Player {ans.playerId}: {room.questions[room.currentQuestionIndex].answers[ans.answer].text} {ans.answer === room.currentCorrectAnswerIndex ? ' (Correct)' : '(Incorrect)'}
+                                            Player {ans.playerId}: {room.questions[room.currentQuestionIndex].answers[ans.answer].answer} {ans.answer === room.currentCorrectAnswerIndex ? ' (Correct)' : '(Incorrect)'}
                                         </li>
                                     ))}
                                 </ul>
-                                <p>Correct Answer: {room.questions[room.currentQuestionIndex].answers[room.currentCorrectAnswerIndex].text}</p>
+                                <p>Correct Answer: {room.questions[room.currentQuestionIndex].answers[room.currentCorrectAnswerIndex].answer}</p>
                             </div>
                         )}
                     </div>
