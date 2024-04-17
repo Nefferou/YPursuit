@@ -15,22 +15,22 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col items-center justify-center w-full h-full p-4">
-      <h1>Multiplayer</h1>
-      <BackButton />
-      <div className="flex justify-between w-full">
-        <div className="flex items-center">
-          <Image src={Rusty} alt="rusty" width={180} height={75} className="brightness-0" />
-        </div>
-        <div className="flex items-center">
-          <Image src={Wapy} alt="wapy" width={180} height={75} className="brightness-0"/>
-          <Image src={Buzzy} alt="buzzy" width={180} height={75} className="brightness-0"/>
-          <Image src={Dally} alt="dally" width={180} height={75} className="brightness-0"/>
-        </div>
+    <h1 className="text-2xl font-extrabold italic">MultiJoueur</h1>
+    <BackButton />
+    <div className="flex justify-between w-full">
+      <div className="flex items-center">
+        <Image src={Rusty} alt="rusty" width={180} height={75} className="brightness-0" />
       </div>
-      <div style={{ display: "flex", gap: "400px" }}>
-        <Button handleClick={() => { router.push('multiplayer/join') }} title="Button" design="simple">Join a room</Button>
-        <Button handleClick={() => { router.push('multiplayer/host') }} title="Button" design="simple">Create a room</Button>
+      <div className="flex items-center">
+        <Image src={Wapy} alt="wapy" width={180} height={75} className="brightness-0"/>
+        <Image src={Buzzy} alt="buzzy" width={180} height={75} className="brightness-0"/>
+        <Image src={Dally} alt="dally" width={180} height={75} className="brightness-0"/>
       </div>
-    </main>
+    </div>
+    <div className="relative z-10" style={{ display: "flex", gap: "100px" }}>
+      <Button handleClick={() => { router.push('multiplayer/join') }} title="Button" design="simple">Créer une room</Button>
+      <Button handleClick={() => { router.push('multiplayer/host') }} title="Button" design="simple">Joindre une room</Button>
+    </div>
+  </main>
   );
 }
