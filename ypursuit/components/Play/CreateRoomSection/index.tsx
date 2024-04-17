@@ -22,14 +22,6 @@ const CreateRoom = () => {
 
     const handleCreateRoom = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const name = formData.get('name') as string;
-        const maxPlayers = formData.get('maxPlayers') as string;
-        const maxRounds = formData.get('maxRounds') as string;
-        const theme = formData.get('theme') as string;
-        const difficulty = formData.get('difficulty') as string;
-        const isPrivate = formData.has('isPrivate') as boolean;
-
         socket = getSocket();
         socket.emit('create_room', { name, maxPlayers, maxRounds, theme, difficulty, isPrivate });
 
