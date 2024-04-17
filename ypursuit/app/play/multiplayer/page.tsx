@@ -19,12 +19,12 @@ export default function Home() {
       <BackButton />
       <div className="flex justify-between w-full">
         <div className="flex items-center">
-          <Image src={Rusty} alt="rusty" width={180} height={75} className="grayscale" />
+          <Image src={Rusty} alt="rusty" width={180} height={75} className="brightness-0" />
         </div>
         <div className="flex items-center">
-          <Image src={Wapy} alt="wapy" width={180} height={75} className="grayscale"/>
-          <Image src={Buzzy} alt="buzzy" width={180} height={75} className="grayscale"/>
-          <Image src={Dally} alt="dally" width={180} height={75} className="grayscale"/>
+          <Image src={Wapy} alt="wapy" width={180} height={75} className="brightness-0"/>
+          <Image src={Buzzy} alt="buzzy" width={180} height={75} className="brightness-0"/>
+          <Image src={Dally} alt="dally" width={180} height={75} className="brightness-0"/>
         </div>
       </div>
       <div style={{ display: "flex", gap: "400px" }}>
