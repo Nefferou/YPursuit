@@ -90,22 +90,22 @@ const CreateRoom = () => {
                         disabled={false}
                         className=''
                         options={[
-                            { value: 'EASY', label: 'EASY' },
-                            { value: 'MEDIUM', label: 'MEDIUM' },
-                            { value: 'HARD', label: 'HARD' },
-                            { value: 'ALL LEVEL', label: 'ALL LEVEL' },
+                            { value: '1', label: 'EASY' },
+                            { value: '2', label: 'MEDIUM' },
+                            { value: '3', label: 'HARD' },
+                            { value: '4', label: 'ALL LEVEL' },
                         ]}
                         onChange={(e) => setDifficulty(e.target.value)}
                     />
                 </div>
                 <div className='border-2 rounded-md p-2 my-2'>
                     <select name="theme" required>
-                        <option value="INFO">Informatique</option>
-                        <option value="MARKET_COM">Market Communication</option>
-                        <option value="AUDIO">Audio</option>
-                        <option value="JEUX_VIDEO">Jeux Vidéo</option>
-                        <option value="ARCHI">Architecture</option>
-                        <option value="CREA_DESIGN">Création Design</option>
+                        <option value="Info">Informatique</option>
+                        <option value="Marketcom">Market Communication</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Jeuxvideo">Jeux Vidéo</option>
+                        <option value="Architecture">Architecture</option>
+                        <option value="Gamedesign">Création Design</option>
                     </select>
                     <SelectBox
                         value={theme}

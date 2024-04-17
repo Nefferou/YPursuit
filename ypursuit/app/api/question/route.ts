@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+/* 
 export const createQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { difficulty, question, theme, comment, answers } = req.body;
@@ -44,20 +45,10 @@ export const deleteQuestion = async (req: NextApiRequest, res: NextApiResponse) 
     }
 };
 
-export const getQuestions = async (req: NextApiRequest, res: NextApiResponse) => {
-    try {
-      const questions = await prisma.question.findMany({
-        include: {
-          answers: true,
-        },
-      });
-      res.status(200).json(questions);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
-    }
-};
+*/
+
   
+/*
 export const getQuestionById = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const { id } = req.query;
@@ -112,4 +103,85 @@ export const updateQuestion = async (req: NextApiRequest, res: NextApiResponse) 
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
     }
-};  
+}; 
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+    if(req.method === 'POST') {
+        try {
+            const { difficulty, question, theme, comment, answers } = req.body;
+            const newAnswers = answers.map((answer: { answer: string, isCorrect: boolean }) => ({
+                answer: answer.answer,
+                isCorrect: answer.isCorrect,
+            }));
+            const createdQuestion = await prisma.question.create({
+                data: {
+                    difficulty,
+                    question,
+                    theme,
+                    comment,
+                    answers: newAnswers,
+                },
+                include: {
+                    answers: true,
+                },
+            });
+            return res.status(201).json(createdQuestion);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+}
+
+*/ 
+
+type RequestBody = {
+  difficulty: string;
+  question: string;
+  theme: string;
+  comment: string;
+  answers: { answer: string, correct: boolean }[];
+}
+
+export async function POST(req: NextApiRequest) {
+  const body: RequestBody = req.body;
+  console.log(req);
+  console.log(body.question);
+
+  return new Response(JSON.stringify({ message: 'ok' }));
+  /*
+  try {
+      const { difficulty, question, theme, comment, answers } = req.body;
+      const newAnswers = answers.map((answer: { answer: string, correct: boolean }) => ({
+        answer: answer.answer,
+        correct: answer.correct,
+      }));
+      const createdQuestion = await prisma.question.create({
+        data: {
+          difficulty,
+          question,
+          theme,
+          comment,
+          answers: newAnswers,
+        }
+      });
+      return new Response(JSON.stringify(createdQuestion), {
+        headers: {
+          'content-type': 'application/json',
+        },
+        status: 201,
+      });
+    } catch (error) {
+      console.error(error);
+      return new Response(JSON.stringify({ message: 'Internal server error' }),{
+        headers: {
+          'content-type': 'application/json',
+        },
+        status: 500,
+      });
+  }
+  */
+
+}
