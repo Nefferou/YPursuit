@@ -41,6 +41,7 @@ const SelectBox = ({
             onChange={onChange}
             value={value}
             name={name}
+            defaultValue={value}
         >
             {options.map(({ value, label }) => (
                 <option key={value} value={value}>

@@ -26,6 +26,7 @@ const InputContact = ({ type, label, value, name, placeholder, error, onChange, 
                 disabled={disabled}
                 className="p-3"
                 required={required}
+                defaultValue={value}
             />
             {error && <p className="text-red-500 text-xs italic">{error}</p>}
         </div>
