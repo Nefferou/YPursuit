@@ -9,9 +9,10 @@ interface InputContactProps {
     error: string,
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
     disabled: boolean,
+    required: boolean,
 }
 
-const InputContact = ({ type, label, value, name, placeholder, error, onChange, disabled }: InputContactProps) => {
+const InputContact = ({ type, label, value, name, placeholder, error, onChange, disabled, required }: InputContactProps) => {
     return (
         <div className="border-2 rounded-md">
             <label className="bg-greenPrimary font-bold p-3 border-2 rounded-md text-white">{label}</label>
@@ -23,7 +24,9 @@ const InputContact = ({ type, label, value, name, placeholder, error, onChange, 
                 placeholder={placeholder}
                 onChange={onChange}
                 disabled={disabled}
-                className="p-3" />
+                className="p-3"
+                required={required}
+            />
             {error && <p className="text-red-500 text-xs italic">{error}</p>}
         </div>
     )
