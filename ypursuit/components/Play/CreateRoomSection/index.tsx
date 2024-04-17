@@ -31,15 +31,15 @@ const CreateRoom = () => {
     };
 
     return (
-        <div>
-            <h2>Créer</h2>
-            <form onSubmit={handleCreateRoom}>
-                <div className='border-2 rounded-md p-2 my-2'>
+        <div className='flex flex-col items-center justify-center w-3/4 h-screen p-4 space-y-4 sm:px-20 sm:py-10 sm:space-y-8 m-auto'>
+            <h3 className='text-3xl font-semibold'>Créer</h3>
+            <form onSubmit={handleCreateRoom} className='m-0'>
+                <div className='border-2 rounded-md p-3 my-2 flex flex-col justify-center w-full gap-4'>
                     <InputContact
                         type='text'
                         label='Room Name'
                         name="name"
-                        placeholder="Room Name"
+                        placeholder="Nom de la salle..."
                         error={''}
                         disabled={false}
                         required={true}
@@ -79,10 +79,10 @@ const CreateRoom = () => {
                         ]}
                         onChange={(e) => setMaxRounds(parseInt(e.target.value))}
                     />
-                    <label htmlFor="isPrivate">Private: {isPrivate ? 'Yes' : 'No'}</label>
-                    <Toggle checked={isPrivate} onClick={() => setIsPrivate(!isPrivate)} />
-                </div>
-                <div className='border-2 rounded-md p-2 my-2'>
+                    <div>
+                        <label htmlFor="isPrivate">Private: {isPrivate ? 'Yes' : 'No'}</label>
+                        <Toggle checked={isPrivate} onClick={() => setIsPrivate(!isPrivate)} />
+                    </div>
                     <SelectBox
                         value={difficulty}
                         label='Difficulty'
@@ -97,16 +97,6 @@ const CreateRoom = () => {
                         ]}
                         onChange={(e) => setDifficulty(e.target.value)}
                     />
-                </div>
-                <div className='border-2 rounded-md p-2 my-2'>
-                    <select name="theme" required>
-                        <option value="Info">Informatique</option>
-                        <option value="Marketcom">Market Communication</option>
-                        <option value="Audio">Audio</option>
-                        <option value="Jeuxvideo">Jeux Vidéo</option>
-                        <option value="Architecture">Architecture</option>
-                        <option value="Gamedesign">Création Design</option>
-                    </select>
                     <SelectBox
                         value={theme}
                         label='Theme'
