@@ -16,7 +16,7 @@ type SelectOption = {
 };
 
 type Props = {
-    value?: string;
+    value?: string | number;
     label?: string;
     name: string;
     disabled?: boolean;

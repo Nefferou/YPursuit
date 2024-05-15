@@ -69,8 +69,23 @@ const CreateRoom = () => {
 
     const handleCreateRoom = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get('name') as string;
+        const maxPlayers = formData.get('maxPlayers') as string;
+        const maxRounds = formData.get('maxRounds') as string;
+        const theme = formData.get('theme') as string;
+        const difficulty = formData.get('difficulty') as string;
+        const isPrivate = formData.has('isPrivate') as boolean;
+
         socket = getSocket();
-        socket.emit('create_room', { ...formData });
+        socket.emit('create_room', { 
+            name, 
+            maxPlayers, 
+            maxRounds, 
+            theme, 
+            difficulty, 
+            isPrivate
+         });
 
         socket.on('room_created', (roomId: string) => {
             router.push(`/play/multiplayer/${roomId}`);
@@ -86,7 +101,7 @@ const CreateRoom = () => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen p-4 space-y-4 sm:px-20 sm:py-10 sm:space-y-8 m-auto'>
+        <div className='flex flex-col items-center justify-center h-screen m-auto'>
             <h3 className='text-3xl font-semibold'>Créer</h3>
             <form onSubmit={handleCreateRoom} className='m-0'>
                 <div className='border-2 rounded-md p-3 my-2 flex flex-col justify-center w-full gap-4'>

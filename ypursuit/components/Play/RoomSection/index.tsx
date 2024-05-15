@@ -20,8 +20,8 @@ interface Player {
 interface Room {
     id: string;
     name: string;
-    maxPlayers: number;
-    maxRounds: number;
+    maxPlayers: string;
+    maxRounds: string;
     theme: string;
     difficulty: string;
     isPrivate: boolean;
@@ -118,8 +118,8 @@ const RoomSection = () => {
             setRoom(updatedRoom);
             setFormData({
                 theme: updatedRoom.theme,
-                maxPlayers: updatedRoom.maxPlayers.toString(),
-                maxRounds: updatedRoom.maxRounds.toString(),
+                maxPlayers: updatedRoom.maxPlayers,
+                maxRounds: updatedRoom.maxRounds,
                 difficulty: updatedRoom.difficulty,
                 isPrivate: updatedRoom.isPrivate
             })
@@ -382,7 +382,7 @@ const RoomSection = () => {
                             ))}
                         </ul>
                         <div className='flex flex-row gap-2 justify-between'>
-                            {isCurrentUserHost && room.status === "WAITING" && (
+                            {isCurrentUserHost && room.status === "WAITING" && room.players.length>1 &&(
                                 <Button
                                     title="Button"
                                     design="simple"
@@ -427,7 +427,14 @@ const RoomSection = () => {
                                 <p>Answers submitted!</p>
                                 {countdown > 0 && (
                                     <div>
-                                        <p>Next question in {countdown}...</p>
+                                        {room.currentQuestionIndex === room.questions.length - 1 ? (
+                                            <p>Game finished! Calculating scores...</p>
+                                        ) : (
+                                            <div>
+                                                <p>Questions remaining: {room.questions.length - room.currentQuestionIndex - 1}</p>
+                                                <p>Next question in {countdown}...</p>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                                 <ul>

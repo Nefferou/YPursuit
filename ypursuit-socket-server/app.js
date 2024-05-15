@@ -40,6 +40,7 @@ io.on('connection', (socket) => {
         };
         rooms.push(room);
         console.log(`Room created with ID: ${roomId}`);
+        console.log(`Room info: ${JSON.stringify(room)}`);
         socket.join(roomId);
         socket.emit('room_created', roomId);
         io.emit('update_rooms', rooms.filter(room => !room.isPrivate));
