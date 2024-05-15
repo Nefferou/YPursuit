@@ -13,15 +13,17 @@ let socket: Socket;
 
 const CreateRoom = () => {
     const router = useRouter();
-    const [name, setName] = useState<string>('');
-    const [maxPlayers, setMaxPlayers] = useState<number>(2);
-    const [maxRounds, setMaxRounds] = useState<number>(1);
-    const [theme, setTheme] = useState<string>('INFO');
-    const [difficulty, setDifficulty] = useState<string>('EASY');
-    const [isPrivate, setIsPrivate] = useState<boolean>(false);
 
     const handleCreateRoom = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get('name') as string;
+        const maxPlayers = formData.get('maxPlayers') as string;
+        const maxRounds = formData.get('maxRounds') as string;
+        const theme = formData.get('theme') as string;
+        const difficulty = formData.get('difficulty') as string;
+        const isPrivate = formData.has('isPrivate') as boolean;
+
         socket = getSocket();
         socket.emit('create_room', { name, maxPlayers, maxRounds, theme, difficulty, isPrivate });
 
@@ -53,18 +55,18 @@ const CreateRoom = () => {
                     <option value="10">10</option>
                 </select>
                 <select name="theme" required>
-                    <option value="INFO">Informatique</option>
-                    <option value="MARKET_COM">Market Communication</option>
-                    <option value="AUDIO">Audio</option>
-                    <option value="JEUX_VIDEO">Jeux Vidéo</option>
-                    <option value="ARCHI">Architecture</option>
-                    <option value="CREA_DESIGN">Création Design</option>
+                    <option value="Info">Informatique</option>
+                    <option value="Marketcom">Market Communication</option>
+                    <option value="Audiovisuel">Audio</option>
+                    <option value="Jeuxvideo">Jeux Vidéo</option>
+                    <option value="Architecture">Architecture</option>
+                    <option value="Gamedesign">Création Design</option>
                 </select>
                 <select name="difficulty" required>
-                    <option value="EASY">Facile</option>
-                    <option value="MEDIUM">Intérmédiaire</option>
-                    <option value="HARD">Difficile</option>
-                    <option value="ALL LEVEL">Tous niveaux</option>
+                    <option value="1">Facile</option>
+                    <option value="2">Intermédiaire</option>
+                    <option value="3">Difficile</option>
+                    <option value="4">Tous niveaux</option>
                 </select>
                 <label>
                     <input type="checkbox" name="isPrivate" /> Salon privé

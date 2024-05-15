@@ -69,7 +69,7 @@ const JoinRoom = () => {
                 }
                 {rooms.map((room) => (
                     <li key={room.id} className='border-2 border-gray-300 p-2 flex flex-row justify-between rounded-md font-bold text-lg'>
-                        {room.name} - Joueurs : {room.players.length}/{room.maxPlayers} - Difficulté: {room.difficulty}
+                        {room.name} - Joueurs : {room.players.length}/{room.maxPlayers} - Difficulté: {room.difficulty === '1' ? 'Facile' : room.difficulty === '2' ? 'Moyen' : room.difficulty === '3' ? 'Difficile' : 'Tous niveaux'}
                         <Button
                             title="Button"
                             design="simple"
@@ -91,6 +91,7 @@ const JoinRoom = () => {
                     placeholder="Entrez le code"
                     error=""
                     disabled={false}
+                    required
                 />
                 <Button
                     title="Button"

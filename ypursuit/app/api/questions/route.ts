@@ -19,6 +19,24 @@ export async function GET(request: NextRequest) {
 
     if (maxQuestions && difficulty && theme) {
 
+        // handle all difficulties
+        if (difficulty === '4') {
+            const allQuestions = await prisma.question.findMany({
+                where: {
+                    theme: theme,
+                }
+            });
+
+            const questions = shuffleArray(allQuestions).slice(0, parseInt(maxQuestions));
+
+            return new Response(JSON.stringify(questions), {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                status: 200,
+            });
+        }
+
         const allQuestions = await prisma.question.findMany({
             where: {
                 difficulty: parseInt(difficulty),

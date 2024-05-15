@@ -30,8 +30,8 @@ export default function Home() {
         </div>
       </div>
       <div className="relative z-10" style={{ display: "flex", gap: "100px" }}>
-        <Button handleClick={() => { router.push('multiplayer/join') }} title="Button" design="simple">Créer une room</Button>
-        <Button handleClick={() => { router.push('multiplayer/host') }} title="Button" design="simple">Joindre une room</Button>
+        <Button handleClick={() => { router.push('multiplayer/host') }} title="Button" design="simple">Créer un salon</Button>
+        <Button handleClick={() => { router.push('multiplayer/join') }} title="Button" design="simple">Rejoindre un salon</Button>
       </div>
     </main>
   );
